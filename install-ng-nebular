@@ -1,0 +1,5 @@
+echo Creating Angular with Nebular @1
+# npm install -g @angular/cli
+# ng new @1
+# cd @1 
+# ng add @nebular/theme
