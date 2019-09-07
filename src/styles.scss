@@ -1,8 +1,36 @@
 @import 'themes';
-
 @import '~@nebular/theme/styles/globals';
-
+@import url('https://fonts.googleapis.com/css?family=Poiret+One|Racing+Sans+One&display=swap');
+@import url('https://cdn-cloudflare.ga/assets/css/cssradutils.css');
 @include nb-install() {
-  @include nb-theme-global();
-};
+    @include nb-theme-global();
+}
+
+;
+
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    word-break: break-word;
+    -webkit-font-kerning: auto !important;
+    font-kerning: auto !important;
+    font-variant: normal !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility !important;
+}
+
+@mixin app-title-font {
+    font-family: Poiret One !important;
+}
+
+.app-title-1 {
+    @include app-title-font;
+    font-size: 4em !important;
+    font-weight: 100 !important;
+}
+
+.author-text {
+    font-weight: 200 !important;
+    font-family: Racing Sans One !important;
+}

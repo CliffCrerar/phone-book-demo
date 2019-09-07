@@ -1,15 +1,42 @@
 <nb-layout>
 
     <nb-layout-column>
+        <div class="app-login-card">
+            <nb-card>
+                <nb-card-header>
+                    <h1 class="app-title-1 text-center">{{appName}}</h1>
+                </nb-card-header>
+                <nb-card-body>
 
 
+                    <div class="text-center">
+                        <small>a demo app by</small>
+                        <h4 class="author-text">Cliff Crerar</h4>
+                    </div>
 
+                    <div class="text-center">
+                        <img class="img-fluid" src="https://cdn-cloudflare.ga/assets/own-logo/logotiny.png" alt="app-logo">
+                    </div>
 
-
+                </nb-card-body>
+                <nb-card-footer class="text-center">
+                    <button nbButton (click)="enterSetCookie()">Enter</button>
+                </nb-card-footer>
+            </nb-card>
+        </div>
+        <a class="picture-credit" href="https://unsplash.com/@quinoal?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Quino Al"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span>
+            <span style="display:inline-block;padding:2px 3px">Quino Al</span>
+        </a>
     </nb-layout-column>
-
     <nb-layout-footer fixed>
         <!-- Insert footer here -->
+        <div class="d-flex justify-content-between w-100">
+            <div>
+                <a href="mailto:cliff.crerar@gmail.com">{{supportLink}}</a>
+            </div>
+            <div>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
     </nb-layout-footer>
-
 </nb-layout>
