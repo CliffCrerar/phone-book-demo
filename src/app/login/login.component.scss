@@ -1,7 +1,30 @@
+/*
+    LOGIN COMPONENT STYLES
+*/
+
 .app-login-card {
     position: relative;
     max-width: 400px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%)
+}
+
+.picture-credit {
+    position: absolute;
+    top: 2%;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    padding: 4px 6px;
+    font-family: -apple-system, BlinkMacSystemFont, San Francisco, Helvetica Neue, Helvetica, Ubuntu, Roboto, Noto, Segoe UI, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.2;
+    display: inline-block;
+    border-radius: 3px
+}
+
+nav {
+    z-index: 10000 !important;
 }

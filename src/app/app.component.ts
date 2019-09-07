@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, Event } from '@angular/router';
 
@@ -9,16 +9,21 @@ import { Router, NavigationEnd, Event } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   /* CLASS ATTRIBUTES */
+  private _loginBackground: Element;
   // no class attributes in this components
   /* CLASS CONSTRUCTOR */
   constructor(private _title: Title, private _router: Router) {
     this._title.setTitle('Phone Book'); // set the title to the initial 'Phone Book'
+    
+    
     return;
   }
 
   /* INIT HOOK */
   ngOnInit() {
     console.log(screen);
+    this._loginBackground = document.querySelector("#loginBackground");
+    console.log('loginBackground: ', this._loginBackground);
     this._router.events.subscribe(routeEvent => this.handleRouteEvent(routeEvent));
     return;
   }
@@ -49,8 +54,12 @@ export class AppComponent implements OnInit {
    */
   dynamicPageTitle(route: string): void {
     switch (route) { // discriminate page route
-      case '/':  this._title.setTitle('Phone book'); 
-      case '/login':  this._title.setTitle('Phone book Login'); 
+      case '/':  this._title.setTitle('Phone book'); break;
+      case '/login':  this._title.setTitle('Phone book Login'); break;
+      case '/app': 
+        this._title.setTitle('Phone book Main App'); 
+
+        break;
     }
     return;
   }

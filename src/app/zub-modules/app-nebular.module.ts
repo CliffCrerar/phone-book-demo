@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { NbLayoutModule, NbButtonModule, NbCardModule, NbThemeModule } from '@nebular/theme';
+import { NbLayoutModule, NbButtonModule, NbCardModule, NbThemeModule, NbIconModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
 
@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
     exports:[
         NbLayoutModule,
         NbEvaIconsModule,
+        NbIconModule,
         NbButtonModule,
         NbCardModule
     ]
