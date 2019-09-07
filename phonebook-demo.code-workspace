@@ -1,0 +1,14 @@
+{
+    "folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "/Users/cliff/git/__phone-book-demo.wiki"
+		}
+	],
+    "settings": {
+        "workbench.colorTheme": "Default Dark+",
+        "workbench.iconTheme": "simple-icons"
+    }
+}
