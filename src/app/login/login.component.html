@@ -3,7 +3,7 @@
     <nb-layout-column>
         <div class="app-login-card">
             <nb-card>
-                <nb-card-header>
+                <nb-card-header class="card-background-color">
                     <h1 class="app-title-1 text-center">{{appName}}</h1>
                 </nb-card-header>
                 <nb-card-body>
@@ -21,16 +21,13 @@
                 </nb-card-body>
                 <nb-card-footer class="text-center">
                     <button routerLink="/app" nbButton (click)="enterSetCookie()">
-                        <nb-icon icon="play-circle-outline">
-                    </nb-icon>
-                    Enter
+                        
+                    Enter<nb-icon icon="play-circle-outline"></nb-icon>
                     </button>
                 </nb-card-footer>
             </nb-card>
         </div>
-        <a class="picture-credit" href="https://unsplash.com/@quinoal?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Quino Al"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span>
-            <span style="display:inline-block;padding:2px 3px">Quino Al</span>
-        </a>
+        <bg-author></bg-author>
     </nb-layout-column>
     <nb-layout-footer fixed>
         <!-- Insert footer here -->

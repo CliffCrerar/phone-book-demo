@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppDataService } from '../_services/app-data.service';
+import { NbToastrService } from '@nebular/theme';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,18 +13,24 @@ export class LoginComponent implements OnInit {
   appName: string;
   supportLink: string;
   /* CLASS CONSTRUCTOR */
-  constructor() {
-    this.appName = "Phonebook";
-    this.supportLink = "Need Support?";
+  constructor(
+    private dataService: AppDataService, 
+    private toastService: NbToastrService,
+    private _router: Router
+    ) {
+    this.appName = this.dataService.getGeneralData().AppName;
+    this.supportLink = this.dataService.getGeneralData().SupportLink;
   }
   /* INIT HOOK */
-  ngOnInit() {
+  ngOnInit():void {
   }
 
   /* CLASS METHODS */
 
-  enterSetCookie() {
-
+  enterSetCookie():void {
+    setTimeout(() => {
+      this._router.navigate(['/app']);
+    }, 3000);
   }
 
 }

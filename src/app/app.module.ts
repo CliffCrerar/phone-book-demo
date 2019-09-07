@@ -1,27 +1,44 @@
-import { BrowserModule } from '@angular/platform-browser';
+/* NG Modules */
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from 'src/app/zub-modules/app-routing.module';
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+/* Submodules */
+import { AppRoutingModule } from 'src/app/zub-modules/app-routing.module';
+/* Developed components */
+import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
-import {AppNebularModule,NbThemeModule} from 'src/app/zub-modules/app-nebular.module'
+import { NbLayoutModule, NbIconModule, NbButtonModule, NbCardModule, NbThemeModule, NbSidebarModule, NbToastrModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { AppDataService } from './_services/app-data.service';
+import { LoginBackgroundAuthorComponent } from './login/bg-author.component';
+
 
 @NgModule({
+  /* DECLARATIONS */
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    LoginBackgroundAuthorComponent
   ],
+  /* IMPORTS */
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({name:'default'}),
-    AppNebularModule
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbSidebarModule.forRoot(),
+    NbEvaIconsModule,
+    NbIconModule,
+    NbButtonModule,
+    NbCardModule,
+    NbToastrModule.forRoot()
   ],
-  providers: [],
+  /* PROVIDERS */
+  providers: [AppDataService],
+  /* APP STRAP */
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { } // export app module

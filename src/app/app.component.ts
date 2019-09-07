@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, Event } from '@angular/router';
 
@@ -9,21 +9,18 @@ import { Router, NavigationEnd, Event } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   /* CLASS ATTRIBUTES */
-  private _loginBackground: Element;
-  // no class attributes in this components
+  _loginBackground: Element;
+  
   /* CLASS CONSTRUCTOR */
   constructor(private _title: Title, private _router: Router) {
     this._title.setTitle('Phone Book'); // set the title to the initial 'Phone Book'
-    
-    
     return;
   }
 
   /* INIT HOOK */
   ngOnInit() {
-    console.log(screen);
+    // console.log(screen);
     this._loginBackground = document.querySelector("#loginBackground");
-    console.log('loginBackground: ', this._loginBackground);
     this._router.events.subscribe(routeEvent => this.handleRouteEvent(routeEvent));
     return;
   }
@@ -39,10 +36,8 @@ export class AppComponent implements OnInit {
    * @returns void
    */
   handleRouteEvent(routeEvent: Event): void {
-    if (routeEvent instanceof NavigationEnd) {
-      console.log('routeEvent: ', routeEvent);
-      this.dynamicPageTitle(routeEvent.url.toString())
-    }
+    // check if routing event is an instance of navigation end
+    routeEvent instanceof NavigationEnd && this.dynamicPageTitle(routeEvent.url.toString()) // run function to update title
     return;
   }
 
@@ -54,11 +49,13 @@ export class AppComponent implements OnInit {
    */
   dynamicPageTitle(route: string): void {
     switch (route) { // discriminate page route
-      case '/':  this._title.setTitle('Phone book'); break;
-      case '/login':  this._title.setTitle('Phone book Login'); break;
-      case '/app': 
-        this._title.setTitle('Phone book Main App'); 
-
+      case '/':
+        this._title.setTitle('Phone book'); break; // set title
+      case '/login':
+        this._title.setTitle('Phone book Login'); break; // set title
+      case '/app':
+        this._title.setTitle('Phone book Main App'); // set title
+        this._loginBackground.remove(); // remove login background from app
         break;
     }
     return;

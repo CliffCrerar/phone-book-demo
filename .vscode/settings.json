@@ -1,4 +1,10 @@
 {
     "workbench.colorTheme": "Default Dark+",
-    "workbench.iconTheme": "simple-icons"
+    "workbench.iconTheme": "simple-icons",
+    "cSpell.words": [
+        "Phonebook",
+        "nb",
+        "service",
+        "toastr"
+    ]
 }

@@ -4,6 +4,20 @@
         <!-- Insert header here -->
     </nb-layout-header>
 
+    <!-- Sidebar -->
+    <nb-sidebar>
+        <div>
+            <button nbButton appearance="ghost" size="large" shape="round">
+                <nb-icon [ngClass]="collapseBtnClass" [icon]="sideBarToggleBtn"></nb-icon>
+            </button>
+        </div>
+    </nb-sidebar>
+
+    <!-- Layout Header -->
+    <nb-layout-header subheader>
+    </nb-layout-header>
+
+    <!-- Main Layout Section -->
     <nb-layout-column>
         <h1>Phone Book</h1>
     </nb-layout-column>
