@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
 import { Observable } from 'rxjs';
+import { AppDataService } from '../_services/app-data.service';
 
 @Component({
   selector: 'app-main',
@@ -9,11 +10,13 @@ import { Observable } from 'rxjs';
 })
 export class MainComponent implements OnInit {
   /* CLASS ATTRIBUTES */
+  appName: string;
   sideBarToggleObservable: Observable<{compact: boolean, tag: string}>
   sideBarToggleBtn: 'arrow-circle-left-outline';
   collapseBtnClass: "collapse-btn-style"
   /* CLASS CONSTRUCTOR */
-  constructor(private sideBarService: NbSidebarService) { 
+  constructor(private sideBarService: NbSidebarService, private dataService: AppDataService) { 
+    this.appName= dataService.getGeneralData().AppName;
     return;
   }
   /* INIT HOOK */

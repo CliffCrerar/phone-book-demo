@@ -12,6 +12,8 @@ import { NbLayoutModule, NbIconModule, NbButtonModule, NbCardModule, NbThemeModu
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppDataService } from './_services/app-data.service';
 import { LoginBackgroundAuthorComponent } from './login/bg-author.component';
+import { SideNavControlsComponent } from './side-nav-controls/side-nav-controls.component';
+import { ContactCardComponent } from './contact-card/contact-card.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { LoginBackgroundAuthorComponent } from './login/bg-author.component';
     AppComponent,
     LoginComponent,
     MainComponent,
-    LoginBackgroundAuthorComponent
+    LoginBackgroundAuthorComponent,
+    SideNavControlsComponent,
+    ContactCardComponent
   ],
   /* IMPORTS */
   imports: [
