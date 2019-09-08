@@ -8,7 +8,7 @@
 		}
 	],
     "settings": {
-        "workbench.colorTheme": "Default Dark+",
+        "workbench.colorTheme": "Shark Dark",
         "workbench.iconTheme": "simple-icons"
     }
 }

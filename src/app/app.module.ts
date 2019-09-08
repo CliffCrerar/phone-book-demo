@@ -6,14 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from 'src/app/zub-modules/app-routing.module';
 /* Developed components */
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
-import { NbLayoutModule, NbIconModule, NbButtonModule, NbCardModule, NbThemeModule, NbSidebarModule, NbToastrModule } from '@nebular/theme';
+import { LoginComponent } from './1_login/login.component';
+import { MainComponent } from './2_main/main.component';
+import { NbLayoutModule, NbIconModule, NbButtonModule, NbCardModule, NbThemeModule, NbSidebarModule, NbToastrModule, NbMenuModule, NbInputModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppDataService } from './_services/app-data.service';
-import { LoginBackgroundAuthorComponent } from './login/bg-author.component';
-import { SideNavControlsComponent } from './side-nav-controls/side-nav-controls.component';
-import { ContactCardComponent } from './contact-card/contact-card.component';
+import { LoginBackgroundAuthorComponent } from './1_login/bg-author.component';
+import { SideNavControlsComponent } from './2.1_side-nav-controls/side-nav-controls.component';
+import { ContactCardComponent } from './2.3_contact-card/contact-card.component';
+import { SearchInputComponent } from './2.2_search-input/search-input.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ContactCardComponent } from './contact-card/contact-card.component';
     MainComponent,
     LoginBackgroundAuthorComponent,
     SideNavControlsComponent,
-    ContactCardComponent
+    ContactCardComponent,
+    SearchInputComponent
   ],
   /* IMPORTS */
   imports: [
@@ -38,7 +40,9 @@ import { ContactCardComponent } from './contact-card/contact-card.component';
     NbIconModule,
     NbButtonModule,
     NbCardModule,
-    NbToastrModule.forRoot()
+    NbToastrModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbInputModule
   ],
   /* PROVIDERS */
   providers: [AppDataService],

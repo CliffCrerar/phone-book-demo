@@ -1,13 +1,20 @@
+<!-- *************************************** 
+TEMPLATE: Contact Card
+*************************************** -->
 <nb-layout>
 
     <nb-layout-column>
+
+        <!-- LOGIN CARD -->
         <div class="app-login-card">
             <nb-card>
+                <!-- CARD HEADER -->
                 <nb-card-header class="card-background-color">
                     <h1 class="app-title-1 text-center">{{appName}}</h1>
                 </nb-card-header>
-                <nb-card-body>
 
+                <!-- CARD BODY -->
+                <nb-card-body>
 
                     <div class="text-center">
                         <small>a demo app by</small>
@@ -19,18 +26,24 @@
                     </div>
 
                 </nb-card-body>
+
+                <!-- CARD FOOTER -->
                 <nb-card-footer class="text-center">
                     <button nbButton hero status="primary" (click)="enterSetCookie()">
-                        
-                    Enter<nb-icon icon="play-circle-outline"></nb-icon>
+                    <nb-icon icon="log-out-outline"></nb-icon>Enter
                     </button>
                 </nb-card-footer>
+
             </nb-card>
         </div>
+
         <bg-author></bg-author>
+
     </nb-layout-column>
+
+    <!-- LAYOUT FOOTER (NOT VISIBLE) -->
     <nb-layout-footer fixed>
-        <!-- Insert footer here -->
+
         <div class="d-flex justify-content-between w-100">
             <div>
                 <a href="mailto:cliff.crerar@gmail.com">{{supportLink}}</a>
@@ -39,5 +52,7 @@
                 <a href="#">Privacy Policy</a>
             </div>
         </div>
+
     </nb-layout-footer>
+
 </nb-layout>
