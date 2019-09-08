@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppDataService } from '../_services/display-data.service';
 
 @Component({
   selector: 'app-search-input',
@@ -6,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-input.component.scss']
 })
 export class SearchInputComponent implements OnInit {
-
-  constructor() { }
-
+  /* CLASS ATTRIBUTES */
+  inputDisplay='hidden';
+  subHeaderTitle: string;
+  /* CLASS CONSTRUCTOR */
+  constructor(private uiService: AppDataService) { 
+    this.subHeaderTitle = this.uiService.getGeneralData().subHeaderTitle;
+  }
+  /* INIT HOOK */
   ngOnInit() {
   }
 

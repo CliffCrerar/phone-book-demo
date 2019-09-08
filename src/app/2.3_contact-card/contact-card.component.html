@@ -3,13 +3,27 @@ TEMPLATE: Contact Card
 *************************************** -->
 <div class="card-grid">
 
-    <nb-card *ngFor="let card of ['c1','c2','c3','c4','c5','c6']">
-        <nb-card-header>Contact</nb-card-header>
+    <nb-card *ngFor="let contact of contactsData" hero status="info">
+        <nb-card-header>
+            <h5 style="color: white">{{contact.FirstName}} {{contact.LastName}}</h5>
+        </nb-card-header>
         <nb-card-body>
-            <p>Number</p>
+            <p><strong>{{phoneNumberCaption}}</strong>: {{contact.Phone}}</p>
+            <p><strong>{{emailAddressCaption}}</strong>: {{contact.Email}}</p>
         </nb-card-body>
         <nb-card-footer>
-            <button nbButton>text</button>
+            <div class="d-flex flex-row justify-content-between w-100">
+
+                <button style="opacity: 0" disabled="true" size="small" status="danger" hero nbButton>
+                        DELETE<nb-icon icon="trash-2-outline"></nb-icon>
+                </button>
+
+
+                <button size="small" status="success" outline nbButton>
+                        EDIT<nb-icon icon="edit-outline"></nb-icon>
+                </button>
+
+            </div>
         </nb-card-footer>
     </nb-card>
 

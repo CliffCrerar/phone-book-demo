@@ -2,8 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import {CommonEnv} from './common_env';
+
 export const environment = {
-  production: false
+  production: false,
+  dataHost: "https://mongodb-rest-api-1.c1i44.now.sh",
+  lookupKey:{
+    allRecords: '1d963791-5450-4275-a614-7349b54df552'
+  }
 };
 
 /*

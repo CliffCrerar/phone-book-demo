@@ -2,6 +2,14 @@
     SEARCH INPUT STYLES
 */
 
+.hidden {
+    display: none
+}
+
+.visible {
+    display: block
+}
+
 @media only screen and (max-width:750px) {
     .sub-header {
         // flex-direction: column;

@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
    * @returns void
    */
   handleRouteEvent(routeEvent: Event): void {
+    // console.log('routeEvent: ', routeEvent);
     // check if routing event is an instance of navigation end
     routeEvent instanceof NavigationEnd && this.dynamicPageTitle(routeEvent.url.toString()) // run function to update title
     return;

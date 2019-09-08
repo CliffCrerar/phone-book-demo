@@ -4,14 +4,16 @@ TEMPLATE: Main App Container
 <nb-layout>
 
     <!-- MAIN HEADER -->
-    <nb-layout-header fixed>
+    <nb-layout-header fixed class="main-app-header">
 
         <div class="d-flex flex-row justify-content-between w-100">
             <div>
-                <h1 class="app-title-1 text-center m-0">{{appName}}</h1>
+                <h1 style="color: white" class="app-title-1 text-center m-0">{{appName}}</h1>
             </div>
             <div>
-                <button nbButton hero status="info">Settings</button>
+                <button nbButton hero status="info" routerLink="/login">
+                    {{settingsBtnTitle}}<nb-icon icon="log-out-outline"></nb-icon>
+                </button>
             </div>
         </div>
 
@@ -20,7 +22,7 @@ TEMPLATE: Main App Container
     <!-- MAIN SIDEBAR -->
     <nb-sidebar>
         <app-side-nav-controls></app-side-nav-controls>
-        <button (click)="toggleSideBar()" nbButton hero status="primary">Collapse</button>
+        <!-- <button (click)="toggleSideBar()" nbButton hero status="primary">Collapse</button> -->
     </nb-sidebar>
 
     <!-- LAYOUT SUB HEADER -->

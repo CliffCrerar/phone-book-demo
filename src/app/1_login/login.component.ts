@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppDataService } from '../_services/app-data.service';
+import { AppDataService } from '../_services/display-data.service';
 import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
 
@@ -14,12 +14,12 @@ export class LoginComponent implements OnInit {
   supportLink: string;
   /* CLASS CONSTRUCTOR */
   constructor(
-    private dataService: AppDataService, 
+    private uiService: AppDataService, 
     private toastService: NbToastrService,
     private _router: Router
     ) {
-    this.appName = this.dataService.getGeneralData().AppName;
-    this.supportLink = this.dataService.getGeneralData().SupportLink;
+    this.appName = this.uiService.getGeneralData().AppName;
+    this.supportLink = this.uiService.getGeneralData().SupportLink;
   }
   /* INIT HOOK */
   ngOnInit():void {

@@ -6,6 +6,7 @@ export class SideNavControl {
     constructor(
         public title: string,
         public icon: string,
-        public link: string[]
+        public link: string[],
+        public optional?: any
     ){ }
 }

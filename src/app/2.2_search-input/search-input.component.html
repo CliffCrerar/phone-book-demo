@@ -3,9 +3,9 @@ TEMPLATE: Search input
 *************************************** -->
 <div class="d-flex justify-content-between w-100 align-items-center">
     <div>
-        <h3 class="sub-header">Contacts</h3>
+        <h3 class="sub-header">{{subHeaderTitle}}</h3>
     </div>
     <div>
-        <input type="text" nbInput fullWidth shape="round" placeholder="Round">
+        <input [ngClass]="inputDisplay" type="text" nbInput fullWidth shape="round" placeholder="Round">
     </div>
 </div>
