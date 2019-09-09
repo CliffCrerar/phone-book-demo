@@ -4,7 +4,6 @@ import { ContactsDisplayModel, ContactModel } from '../_models/contact.model';
 import { AppDataService } from '../_services/display-data.service';
 import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 
-
 @Component({
   selector: 'app-contact-card',
   templateUrl: './contact-card.component.html',
@@ -17,6 +16,8 @@ export class ContactCardComponent implements OnInit {
   public emailAddressCaption: string;
   public contactsData: ContactsDisplayModel[];
   private handleSubscriptionEmission;
+  public cardFlipped = false;
+  public toggle = false;
   /* CLASS CONSTRUCTOR */
   constructor(
     private uiService: AppDataService,
@@ -42,5 +43,12 @@ export class ContactCardComponent implements OnInit {
    */
   appendInsertedRecord(newContact: ContactModel): void {
     this.contactsData.push(newContact.opt[0]);
+  }
+
+  /**
+   * TODO:
+   */
+  onClickflipCard():void {
+    this.cardFlipped = true;
   }
 }
