@@ -88,7 +88,7 @@ export class HttpService {
     // this.http.post<PostNewContact>(this.buildUrl('postContact'),postBody,this.headerPostNewContact());
     console.log('postBody: ', PostBody);
     return this.http.put<PostNewContact>(
-      this.buildUrl('postContact', true),
+      this.buildUrl('postContact', false),
       PostBody,
       this.headerPostNewContact()
     );
