@@ -34,7 +34,6 @@ export class MainComponent implements OnInit {
     // this.msgService.subScribeToMessages().subscribe(handleMsgReceived);
     // function handleMsgReceived(msg){
     //   console.log('msg: ', msg);
-      
     // }
     return;
   }
