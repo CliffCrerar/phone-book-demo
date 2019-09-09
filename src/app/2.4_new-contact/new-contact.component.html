@@ -1,21 +1,26 @@
 <!-- ***************************************
 TEMPLATE: New Contact Card
 *************************************** -->
-<ng-template #display>
-    <nb-card class="mt-5 animated slideInLeft" [ngIf]="display">
+<ng-container *ngIf="display">
+    <nb-card class="mt-5 animated slideInLeft">
+
         <nb-card-header class="text-center">
             New Contact
         </nb-card-header>
         <nb-card-body>
-            <input *ngFor="let row of formDefinition" name="{{row.name}}" class="new-input" status="info" type="text" nbInput fullWidth fieldSize="medium" placeholder="{{row.placeholder}}">
+            <form>
+                <input *ngFor="let row of formDefinition; let i = index" name="{{row.name}}" class="new-input" [status]="row.inputState" type="text" nbInput fullWidth fieldSize="medium" placeholder="{{row.placeholder}}" (change)="checkInput(row,i,$event)" required id="newContact-{{i}}"
+                    [(ngModel)]="row.value" (onkeypress)="onKeyformat(row,i)">
+            </form>
         </nb-card-body>
         <nb-card-footer class="d-flex flex-row-reverse justify-content-between">
-            <button nbButton size="small" hero status="success">
+            <button nbButton size="small" hero status="success" (click)="postContact($event)">
             <nb-icon icon="plus-outline"></nb-icon>
         </button>
-            <button nbButton size="small" hero status="warning">
+            <button nbButton size="small" (click)="cancelNewContact()" hero status="warning">
             <nb-icon icon="slash-outline"></nb-icon>
         </button>
         </nb-card-footer>
+
     </nb-card>
-</ng-template>
+</ng-container>

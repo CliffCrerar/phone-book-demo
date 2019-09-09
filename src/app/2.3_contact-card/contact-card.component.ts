@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HttpService } from '../_services/http.service';
-import { ContactsDisplayModel } from '../_models/contact.model';
+import { ContactsDisplayModel, ContactModel } from '../_models/contact.model';
 import { AppDataService } from '../_services/display-data.service';
+import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 
 
 @Component({
@@ -17,16 +18,29 @@ export class ContactCardComponent implements OnInit {
   public contactsData: ContactsDisplayModel[];
   private handleSubscriptionEmission;
   /* CLASS CONSTRUCTOR */
-  constructor(private uiService: AppDataService,  private http: HttpService) {
+  constructor(
+    private uiService: AppDataService,
+    private http: HttpService,
+    private msgService: InterComponentCommsService
+  ) {
     this.phoneNumberCaption = this.uiService.getGeneralData().phoneNumberCaption;
     this.emailAddressCaption = this.uiService.getGeneralData().emailAddressCaption;
-    this.handleSubscriptionEmission = data => this.contactsData = data.table.map(({intId, FirstName, LastName, Phone, Email, _id}) => new ContactsDisplayModel(FirstName, LastName, Phone, Email,intId, _id));
+    this.handleSubscriptionEmission = data => this.contactsData =
+      data.table.map(({ intId, FirstName, LastName, Phone, Email, _id }) =>
+        new ContactsDisplayModel(FirstName, LastName, Phone, Email, intId, _id));
   }
   /* INIT HOOK */
   ngOnInit() {
     this.http.provideAllRecords().subscribe(this.handleSubscriptionEmission);
+    this.msgService.subScribeToNewContacts().subscribe(this.appendInsertedRecord);
     return;
   }
 
   /* CLASS METHODS */
+  /**
+   * TODO:
+   */
+  appendInsertedRecord(newContact: ContactModel): void {
+    this.contactsData.push(newContact.opt[0]);
+  }
 }

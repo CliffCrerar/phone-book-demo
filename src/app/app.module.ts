@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms'
 /* Submodules */
 import { AppRoutingModule } from 'src/app/zub-modules/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -40,6 +41,7 @@ import { NewContactComponent } from './2.4_new-contact/new-contact.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     // Nebular Modules
     NbThemeModule.forRoot({ name: 'default' }),

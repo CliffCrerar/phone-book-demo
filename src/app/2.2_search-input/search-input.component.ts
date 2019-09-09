@@ -9,17 +9,17 @@ import { InterComponentCommsService } from '../_services/intercomp-comms.service
 })
 export class SearchInputComponent implements OnInit {
   /* CLASS ATTRIBUTES */
-  inputDisplay='hidden';
+  inputDisplay = 'hidden';
   subHeaderTitle: string;
-  
+
   /* CLASS CONSTRUCTOR */
-  constructor(private uiService: AppDataService,private msgService: InterComponentCommsService) { 
+  constructor(private uiService: AppDataService, private msgService: InterComponentCommsService) {
     this.subHeaderTitle = this.uiService.getGeneralData().subHeaderTitle;
   }
   /* INIT HOOK */
   ngOnInit() {
     this.msgService.subScribeToMessages().subscribe(msg => {
-      switch(msg){
+      switch (msg) {
         case 'search': this.toggleSearchInput();
       }
     });
@@ -27,7 +27,7 @@ export class SearchInputComponent implements OnInit {
 
   /* CLASS METHODS */
 
-  toggleSearchInput(): string{
+  toggleSearchInput(): string {
     return this.inputDisplay === 'hidden' ? this.inputDisplay = 'visible' : this.inputDisplay = 'hidden';
   }
 

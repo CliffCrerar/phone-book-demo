@@ -54,24 +54,21 @@ export class SideNavControlsComponent implements OnInit {
   }
 
   /**
-   * @name addControl
    * @description Adds controls to the side nav controls attribute
-   * @param ( title , icon , link )
    */
   addControl(par1: string, par2: string, par3: string[]): void {
     this.sideNavControls.push(new SideNavControl(par1, par2, par3));
   }
 
   /**
-   * @name onMenuSelect
    * @description detects a menu item click
-   * @param ev
    */
   onMenuSelect(routerUrl: string): void {
     // console.log('routerUrl: ', routerUrl);
     switch (routerUrl) { // switch router URL
       case '/app/side-nav-collapsed': return handleSideNavExpandCollapse.call(this);
       case '/app/search-contact': return handleSearchActivation.call(this);
+      case '/app/add-contact': return handelAddContactFormDisplay.call(this);
     }
 
     /* Handle Search bar Activate / deactivate switch */
@@ -85,6 +82,10 @@ export class SideNavControlsComponent implements OnInit {
       this.sideNavService.toggle(true, 'left');
       this.sideNavCollapsed = !this.sideNavCollapsed;
       this.invertSideNavControlArrow(this.sideNavCollapsed);
+    }
+
+    function handelAddContactFormDisplay() {
+      this.msgService.broadCastMessage('add-contact');
     }
   }
 }

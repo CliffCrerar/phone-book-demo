@@ -4,23 +4,44 @@
  */
 import { Subject } from 'rxjs';
 import { Inject } from '@angular/core';
+import { ContactModel } from '../_models/contact.model';
 
 @Inject({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class InterComponentCommsService {
-     /* CLASS METHODS */
-     subjectObservable: Subject<any>;
-     /* CLASS CONSTRUCTOR */
-     constructor(){
-        this.subjectObservable = new Subject<any>();
-     }
-     /* CLASS METHODS */
-     broadCastMessage(message: any):void {
-         this.subjectObservable.next(message);
-     }
+  /* CLASS METHODS */
+  subjectObservable: Subject<any>;
+  insertNewEntrySubject: Subject<ContactModel>;
+  /* CLASS CONSTRUCTOR */
+  constructor() {
+    this.subjectObservable = new Subject<any>();
+    this.insertNewEntrySubject = new Subject<ContactModel>();
+  }
+  /* CLASS METHODS */
+  // MAIN MENU MESSAGES
+  broadCastMessage(message: any): void {
+    this.subjectObservable.next(message);
+  }
 
-    subScribeToMessages(){
-        return this.subjectObservable;
-    }
- }
+  /**
+   * TODO:
+   */
+  subScribeToMessages(): Subject<string> {
+    return this.subjectObservable;
+  }
+
+  /**
+   * TODO:
+   */
+  updateAfterInsert(newContact: ContactModel): Subject<ContactModel> {
+    this.subjectObservable.next();
+  }
+
+  /**
+   * TODO:
+   */
+  subScribeToNewContacts(): Subject<ContactModel> {
+    return this.insertNewEntrySubject;
+  }
+}
