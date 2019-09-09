@@ -14,12 +14,12 @@ export class AppDataService {
     private _supportLink = "Need Support?";
     private _enterBtnCaption = "ENTER";
     // Main page
-    private _subHeaderTitle = "Contact";
+    private _subHeaderTitle = "Contacts";
     private _settingsBtnTitle = "Logout"
     private _phoneNumberCaption = "Phone Number"
     private _emailAddressCaption = "Email"
     /*CLASS CONSTRUCTOR */
-    constructor(){}
+    constructor() { }
 
     /* CLASS METHODS */
     getGeneralData(): GeneralAppDisplay {

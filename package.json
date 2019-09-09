@@ -3,8 +3,8 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
-        "build": "ng build --buildOptimizer=true --deleteOutputPath=true --extractCss=true --prod=true --progress=true --sourceMap=true",
+        "start": "ng serve --hmr=true --prod=false --sourceMap=true  --progress=true --verbose=true",
+        "build": "ng build --buildOptimizer=true --deleteOutputPath=true --extractCss=true --prod=true --progress=true --sourceMap=true --commonChunk=true",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"

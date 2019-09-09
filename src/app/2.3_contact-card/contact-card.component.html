@@ -1,11 +1,11 @@
-<!-- *************************************** 
+<!-- ***************************************
 TEMPLATE: Contact Card
 *************************************** -->
 <div class="card-grid">
 
-    <nb-card *ngFor="let contact of contactsData" hero status="info">
-        <nb-card-header>
-            <h5 style="color: white">{{contact.FirstName}} {{contact.LastName}}</h5>
+    <nb-card *ngFor="let contact of contactsData" class="animated fadeInUp">
+        <nb-card-header class="contact-card-header">
+            <h5>{{contact.FirstName}} {{contact.LastName}}</h5>
         </nb-card-header>
         <nb-card-body>
             <p><strong>{{phoneNumberCaption}}</strong>: {{contact.Phone}}</p>
@@ -15,12 +15,11 @@ TEMPLATE: Contact Card
             <div class="d-flex flex-row justify-content-between w-100">
 
                 <button style="opacity: 0" disabled="true" size="small" status="danger" hero nbButton>
-                        DELETE<nb-icon icon="trash-2-outline"></nb-icon>
+                    DELETE<nb-icon icon="trash-2-outline"></nb-icon>
                 </button>
 
-
                 <button size="small" status="success" outline nbButton>
-                        EDIT<nb-icon icon="edit-outline"></nb-icon>
+                    EDIT<nb-icon icon="edit-outline"></nb-icon>
                 </button>
 
             </div>

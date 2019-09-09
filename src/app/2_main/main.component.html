@@ -20,14 +20,16 @@ TEMPLATE: Main App Container
     </nb-layout-header>
 
     <!-- MAIN SIDEBAR -->
-    <nb-sidebar>
+    <nb-sidebar style="background:#E7C7F9">
         <app-side-nav-controls></app-side-nav-controls>
         <!-- <button (click)="toggleSideBar()" nbButton hero status="primary">Collapse</button> -->
+        <app-new-contact></app-new-contact>
     </nb-sidebar>
 
     <!-- LAYOUT SUB HEADER -->
-    <nb-layout-header subheader>
+    <nb-layout-header subheader class="sub-header-bg">
         <app-search-input class="w-100"></app-search-input>
+
     </nb-layout-header>
 
     <!-- MAIN CARD CONTAINER -->
