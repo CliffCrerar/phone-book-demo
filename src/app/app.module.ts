@@ -19,6 +19,7 @@ import { SearchInputComponent } from './2.2_search-input/search-input.component'
 /* Developed services */
 import { AppDataService } from './_services/display-data.service';
 import { HttpService } from './_services/http.service';
+import { InterComponentCommsService } from './_services/intercomp-comms.service';
 
 
 
@@ -53,7 +54,7 @@ import { HttpService } from './_services/http.service';
     // Nebular Modules
   ],
   /* PROVIDERS */
-  providers: [AppDataService,HttpService],
+  providers: [AppDataService,HttpService,InterComponentCommsService],
   /* APP STRAP */
   bootstrap: [AppComponent]
 })

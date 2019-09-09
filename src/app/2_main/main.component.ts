@@ -3,6 +3,7 @@ import { NbSidebarService } from '@nebular/theme';
 import { Observable } from 'rxjs';
 import { AppDataService } from '../_services/display-data.service';
 import { HttpService } from '../_services/http.service';
+import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 
 @Component({
   selector: 'app-main',
@@ -20,7 +21,8 @@ export class MainComponent implements OnInit {
   constructor(
     private sideBarService: NbSidebarService, 
     private uiService: AppDataService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    // private msgService: InterComponentCommsService
     ) { 
     this.appName= uiService.getGeneralData().AppName;
     this.settingsBtnTitle= uiService.getGeneralData().settingsBtnTitle;
@@ -29,6 +31,11 @@ export class MainComponent implements OnInit {
   /* INIT HOOK */
   ngOnInit():void {
     this.sideBarToggleObservable = this.sideBarService.onToggle();
+    // this.msgService.subScribeToMessages().subscribe(handleMsgReceived);
+    // function handleMsgReceived(msg){
+    //   console.log('msg: ', msg);
+      
+    // }
     return;
   }
 
