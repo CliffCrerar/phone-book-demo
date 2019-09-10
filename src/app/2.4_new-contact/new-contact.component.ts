@@ -75,7 +75,7 @@ export class NewContactComponent implements OnInit {
    */
   handleInsertResponse(response: PartialObserver<any>): void {
     //TODO:
-    return response.opt[0];
+    // return response.opt[0];
   }
 
 

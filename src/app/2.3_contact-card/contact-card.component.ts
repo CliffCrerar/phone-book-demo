@@ -33,7 +33,7 @@ export class ContactCardComponent implements OnInit {
   /* INIT HOOK */
   ngOnInit() {
     this.http.provideAllRecords().subscribe(this.handleSubscriptionEmission);
-    this.msgService.subScribeToNewContacts().subscribe(this.appendInsertedRecord);
+    // this.msgService.subScribeToNewContacts().subscribe(this.appendInsertedRecord);
     return;
   }
 
@@ -41,9 +41,9 @@ export class ContactCardComponent implements OnInit {
   /**
    * TODO:
    */
-  appendInsertedRecord(newContact: ContactModel): void {
-    this.contactsData.push(newContact.opt[0]);
-  }
+  // appendInsertedRecord(newContact: ContactModel): void {
+    // this.contactsData.push(newContact.opt[0]);
+  // }
 
   /**
    * TODO:

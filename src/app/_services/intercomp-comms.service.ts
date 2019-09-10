@@ -34,9 +34,9 @@ export class InterComponentCommsService {
   /**
    * TODO:
    */
-  updateAfterInsert(newContact: ContactModel): Subject<ContactModel> {
-    this.subjectObservable.next();
-  }
+  // updateAfterInsert(newContact: ContactModel): Subject<ContactModel> {
+  //   this.subjectObservable.next();
+  // }
 
   /**
    * TODO:
