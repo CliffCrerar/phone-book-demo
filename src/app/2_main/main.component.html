@@ -1,14 +1,16 @@
-<!-- *************************************** 
+<!-- ***************************************
 TEMPLATE: Main App Container
 *************************************** -->
 <nb-layout>
-
     <!-- MAIN HEADER -->
     <nb-layout-header fixed class="main-app-header">
-
         <div class="d-flex flex-row justify-content-between w-100">
+
             <div>
                 <h1 style="color: white" class="app-title-1 text-center m-0">{{appName}}</h1>
+            </div>
+            <div>
+                <img class="img-fluid" alt="phone-book-icon" src="../../assets/phonebook-logo_4.png">
             </div>
             <div>
                 <button nbButton hero status="info" routerLink="/login">
@@ -16,31 +18,24 @@ TEMPLATE: Main App Container
                 </button>
             </div>
         </div>
-
     </nb-layout-header>
-
     <!-- MAIN SIDEBAR -->
     <nb-sidebar style="background:#E7C7F9">
         <app-side-nav-controls></app-side-nav-controls>
         <!-- <button (click)="toggleSideBar()" nbButton hero status="primary">Collapse</button> -->
         <app-new-contact></app-new-contact>
     </nb-sidebar>
-
     <!-- LAYOUT SUB HEADER -->
     <nb-layout-header subheader class="sub-header-bg">
         <app-search-input class="w-100"></app-search-input>
-
     </nb-layout-header>
-
     <!-- MAIN CARD CONTAINER -->
     <nb-layout-column>
         <!-- <h1>Phone Book</h1> -->
         <app-contact-card></app-contact-card>
     </nb-layout-column>
-
     <!-- LAYOUT FOOTER -->
     <nb-layout-footer fixed>
         <!-- Insert footer here -->
     </nb-layout-footer>
-
 </nb-layout>

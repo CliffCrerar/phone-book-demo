@@ -1,7 +1,19 @@
 <!-- ***************************************
 TEMPLATE: Contact Card
 *************************************** -->
-<div class="card-grid">
+<div class="data-loader" *ngIf="loadingElementShow">
+    <img src="../../assets/wait-cards-loader.png" class="img-fluid cloud-loader" alt="cloud loader">
+    <p>{{loadMessages}}</p>
+    <!-- <span class="dot1 animated zoomIn">.</span> -->
+    <!-- <span class="dot2 animated zoomIn">.</span> -->
+    <!-- <span class="dot3 animated zoomIn">.</span> -->
+    <nb-card>
+        <nb-card-body>
+            <nb-progress-bar [value]="loadingProgress"></nb-progress-bar>
+        </nb-card-body>
+    </nb-card>
+</div>
+<div class="card-grid" *ngIf="!loadingElementShow">
     <!-- <nb-flip-card>
         <nb-card-front> -->
     <!-- CARD FRONT -->

@@ -8,7 +8,7 @@ import { AppRoutingModule } from 'src/app/zub-modules/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 /* Style framework modules */
 // tslint:disable-next-line: max-line-length
-import { NbLayoutModule, NbIconModule, NbButtonModule, NbCardModule, NbThemeModule, NbSidebarModule, NbToastrModule, NbMenuModule, NbInputModule } from '@nebular/theme';
+import { NbLayoutModule, NbIconModule, NbButtonModule, NbCardModule, NbThemeModule, NbSidebarModule, NbToastrModule, NbMenuModule, NbInputModule, NbProgressBarModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 /* Developed components */
 import { AppComponent } from './app.component';
@@ -53,7 +53,8 @@ import { NewContactComponent } from './2.4_new-contact/new-contact.component';
     NbCardModule,
     NbToastrModule.forRoot(),
     NbMenuModule.forRoot(),
-    NbInputModule
+    NbInputModule,
+    NbProgressBarModule
     // Nebular Modules
   ],
   /* PROVIDERS */
