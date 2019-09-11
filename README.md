@@ -1,32 +1,46 @@
 # Phone book demo app
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.
-
 ## Application development documentation
 
+This is a purely showcase application with little real world applicaiton, it is meant as a demonstration of coding knowledge, framework familiarity and design skills. Although it is not finished there are some demo features, to see the result so far without pulling the git please visit [this link](https://phonebook-demo-app.c1i44.now.sh) It is being built with the mean stack.
 
+Here is also the link to the current project as it is now: 
+
+[Git project management tool for a phone book demo app](https://github.com/CliffCrerar/phone-book-demo/projects)
+
+### Aplication stack diagram
+
+![Stack](https://cdn-cloudflare.ga/assets/diagrams/phone-demo-app/stack.png)
+
+### Component diagram
+
+![Components](https://cdn-cloudflare.ga/assets/diagrams/phone-demo-app/component.png)
 
 ## Development server
 
--> still to conf
+```
+git clone https://github.com/CliffCrerar/phone-book-demo.git
+
+npm install
+
+npm start
+
+```
 
 ## Code scaffolding
 
--> Still to conf
+See repository [wiki](https://github.com/CliffCrerar/phone-book-demo/wiki) for more on this
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Build parameters have alreadt been configured only requires:
 
-## Running unit tests
+```
+npm run build
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```
+This will produce the production version of the demo app.
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-# phone-book-demo
+Please contact me at cliff.crerar@gmail.com ro cliff@infinityarc.net
