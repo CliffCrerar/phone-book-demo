@@ -4,6 +4,7 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { NbSidebarService } from '@nebular/theme';
 import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 import { Subject } from 'rxjs';
+import { AppDataService } from '../_services/display-data.service';
 
 @Component({
   selector: 'app-side-nav-controls',
@@ -20,16 +21,18 @@ export class SideNavControlsComponent implements OnInit {
 
   /* CLASS CONSTRUCTOR*/
   constructor(
+    private displayService: AppDataService,
     private _router: Router,
-    private sideNavService: NbSidebarService,
+    // private sideNavService: NbSidebarService,
     private msgService: InterComponentCommsService
-  ) {
-    this.addControl('Collapse side-nav', 'arrowhead-left-outline', ['side-nav-collapsed']);
-    this.addControl('Search', 'search-outline', ['search-contact']);
-    this.addControl('New contact', 'plus-circle-outline', ['add-contact']);
-    this.addControl('Delete contact', 'person-delete-outline', ['add-contact']);
-    this.addControl('Logout', 'log-out-outline', ['/login']);
 
+  ) {
+    const { collapse, search, addContact, deleteContact, logout } = this.displayService.getGeneralData();
+    this.addControl(collapse, 'arrowhead-left-outline', ['side-nav-collapsed']);
+    this.addControl(search, 'search-outline', ['search-contact']);
+    this.addControl(addContact, 'plus-circle-outline', ['add-contact']);
+    this.addControl(deleteContact, 'person-delete-outline', ['delete-contact']);
+    this.addControl(logout, 'log-out-outline', ['/login']);
     this.sendMessage = this.msgService.broadCastMessage;
   }
 
@@ -69,6 +72,7 @@ export class SideNavControlsComponent implements OnInit {
       case '/app/side-nav-collapsed': return handleSideNavExpandCollapse.call(this);
       case '/app/search-contact': return handleSearchActivation.call(this);
       case '/app/add-contact': return handelAddContactFormDisplay.call(this);
+      case '/app/delete-contact': return handelDeleteModeActivation.call(this);
     }
 
     /* Handle Search bar Activate / deactivate switch */
@@ -83,9 +87,14 @@ export class SideNavControlsComponent implements OnInit {
       this.sideNavCollapsed = !this.sideNavCollapsed;
       this.invertSideNavControlArrow(this.sideNavCollapsed);
     }
-
+    /* Handles the add contact action */
     function handelAddContactFormDisplay() {
       this.msgService.broadCastMessage('add-contact');
+    }
+    /* Handles delete contacts mode activation */
+    function handelDeleteModeActivation() {
+      console.log('DELETE MODE HANDLER');
+      this.msgService.broadCastMessage('delete-contact');
     }
   }
 }

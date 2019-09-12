@@ -11,5 +11,10 @@
          public settingsBtnTitle: string,
          public phoneNumberCaption: string,
          public emailAddressCaption: string,
+         public collapse: string,
+         public search: string,
+         public addContact: string,
+         public deleteContact: string,
+         public logout: string
          ) { }
  }

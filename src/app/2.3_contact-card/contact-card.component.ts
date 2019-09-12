@@ -3,6 +3,8 @@ import { HttpService } from '../_services/http.service';
 import { ContactsDisplayModel, ContactModel } from '../_models/contact.model';
 import { AppDataService } from '../_services/display-data.service';
 import { InterComponentCommsService } from '../_services/intercomp-comms.service';
+import { HttpResponse } from '@angular/common/http';
+import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-contact-card',
@@ -12,17 +14,21 @@ import { InterComponentCommsService } from '../_services/intercomp-comms.service
 })
 export class ContactCardComponent implements OnInit {
   /* CLASS ATTRIBUTES */
+  public deleteMode = true;
   public phoneNumberCaption: string;
   public emailAddressCaption: string;
   public contactsData: ContactsDisplayModel[] = [];
   private handleSubscriptionEmission;
+  private handelDeleteMode;
+  private deleteModeToggle;
   public cardFlipped = false;
   public toggle = false;
   public loadingProgress = 0;
   public interValInject;
   public loadMessages = 'Welcome';
   public loadingElementShow = true;
-
+  public httpResponse: HttpResponse;
+  deleteObservable = new Subscriber<any>();
   /* CLASS CONSTRUCTOR */
   constructor(
     private uiService: AppDataService,
@@ -31,6 +37,18 @@ export class ContactCardComponent implements OnInit {
   ) {
     this.phoneNumberCaption = this.uiService.getGeneralData().phoneNumberCaption;
     this.emailAddressCaption = this.uiService.getGeneralData().emailAddressCaption;
+
+    this.handelDeleteMode = (): void => {
+      this.deleteModeToggle();
+      return;
+    }
+
+    this.deleteModeToggle = (): boolean => {
+      console.log("toggle delete mode");
+      return this.deleteMode = !this.deleteMode;
+    }
+
+
 
     this.interValInject = (): void => {
       this.loadingProgress++;
@@ -50,27 +68,24 @@ export class ContactCardComponent implements OnInit {
     };
     this.handleSubscriptionEmission = data => {
       console.log(data);
-      this.contactsData = data.table.map(({ intId, FirstName, LastName, Phone, Email, _id })=>{
-        return new ContactsDisplayModel(FirstName, LastName, Phone, Email, intId, _id)});
-      // this.contactCardPromises = data.table.map( ({ intId, FirstName, LastName, Phone, Email, _id })
-        // return
-        // new Promise(function (resolve, reject) {
-          // setTimeout(() => {
-            // resolve(
-              // new ContactsDisplayModel(FirstName, LastName, Phone, Email, intId, _id)
-            // );
-          // }, 100);
-        // });
-      // });
-
+      this.contactsData = data.table.map(({ intId, FirstName, LastName, Phone, Email, _id }) => {
+        return new ContactsDisplayModel(FirstName, LastName, Phone, Email, intId, _id)
+      });
     };
-
   }
   /* INIT HOOK */
   ngOnInit() {
     this.http.provideAllRecords().subscribe(this.handleSubscriptionEmission);
     const thisInterval = setInterval(this.interValInject, 50);
     if (this.loadingProgress === 100) { clearInterval(thisInterval); }
+
+    // Subscribe to broadcaster
+    this.msgService.subScribeToMessages().subscribe(msg => {
+      console.log(msg);
+      switch (msg) {
+        case "delete-contact": this.handelDeleteMode(); break;
+      }
+    });
 
 
   }
@@ -88,6 +103,22 @@ export class ContactCardComponent implements OnInit {
   onClickflipCard(): void {
     this.cardFlipped = true;
   }
+
+  /**
+   * @description Removes card from database
+   */
+  onDeleteContactClick(contactId: string, index:number): void {
+    console.log('index: ', index);
+    console.log('contactId: ', contactId);
+    const url = this.http.deleteContact(contactId,index);
+    // this.contactsData
+
+    this.contactsData.splice(index,1);
+    //.delete(this.buildUrl('get-contacts')+"/?delete_contact:${contactId}")
+
+  }
+
+
 
 }
 

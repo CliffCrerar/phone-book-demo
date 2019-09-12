@@ -17,7 +17,7 @@ TEMPLATE: Contact Card
     <!-- <nb-flip-card>
         <nb-card-front> -->
     <!-- CARD FRONT -->
-    <nb-card *ngFor="let contact of contactsData" class="animated fadeInUp">
+    <nb-card *ngFor="let contact of contactsData;let i = index" class="animated zoomIn">
         <nb-card-header class="contact-card-header">
             <h5>{{contact.FirstName}} {{contact.LastName}}</h5>
         </nb-card-header>
@@ -28,13 +28,17 @@ TEMPLATE: Contact Card
         <nb-card-footer>
             <div class="d-flex flex-row justify-content-between w-100">
 
-                <button style="opacity: 0" disabled="true" size="small" status="danger" hero nbButton>
-                    DELETE<nb-icon icon="trash-2-outline"></nb-icon>
-                </button>
+                <div>
+                    <button class="animated zoomIn" (click)="onDeleteContactClick(contact._id,i)" *ngIf="deleteMode" size="small" status="danger" hero nbButton>
+                    <nb-icon icon="trash-2-outline"></nb-icon>
+                  </button>
+                </div>
 
-                <button size="small" status="success" outline nbButton>
-                    EDIT<nb-icon icon="edit-outline"></nb-icon>
-                </button>
+                <div>
+                    <button class="align-self-end" size="small" status="success" outline nbButton>
+                    <nb-icon icon="edit-outline"></nb-icon>
+                  </button>
+                </div>
 
             </div>
         </nb-card-footer>
