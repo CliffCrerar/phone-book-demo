@@ -2,7 +2,7 @@
 TEMPLATE: New Contact Card
 *************************************** -->
 <ng-container *ngIf="display">
-    <nb-card class="mt-5 animated slideInLeft">
+    <nb-card [ngClass]="slideOut" class="mt-5 animated slideInLeft">
 
         <nb-card-header class="text-center">
             New Contact

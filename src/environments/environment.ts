@@ -7,7 +7,7 @@ import {CommonEnv} from './common_env';
 export const environment = {
   production: false,
   dataHostLive: "https://mongodb-rest-api-1.c1i44.now.sh",
-  dataHostDev: "http://localhost:3050",
+  //dataHostLive: "http://localhost:3050",
   lookupKey:{
     getAllRecords: '1d963791-5450-4275-a614-7349b54df552',
     postContact: '33183092-929b-44b4-9d7e-d2a8b3a98ead',

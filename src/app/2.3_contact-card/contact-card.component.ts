@@ -14,7 +14,7 @@ import { Subscriber } from 'rxjs';
 })
 export class ContactCardComponent implements OnInit {
   /* CLASS ATTRIBUTES */
-  public deleteMode = true;
+  public deleteMode = false;
   public phoneNumberCaption: string;
   public emailAddressCaption: string;
   public contactsData: ContactsDisplayModel[] = [];
@@ -27,8 +27,9 @@ export class ContactCardComponent implements OnInit {
   public interValInject;
   public loadMessages = 'Welcome';
   public loadingElementShow = true;
-  public httpResponse: HttpResponse;
-  deleteObservable = new Subscriber<any>();
+  public httpResponse: HttpResponse<any>;
+  public slideOut:string;
+  deleteObservable = new Subscriber<HttpResponse<any>>();
   /* CLASS CONSTRUCTOR */
   constructor(
     private uiService: AppDataService,
@@ -87,6 +88,13 @@ export class ContactCardComponent implements OnInit {
       }
     });
 
+    // Subscribe to added card to place in view as first card once created
+    this.http.getNewContactCard().subscribe(newContact=>{
+      console.log('newContact: ', newContact[0].new = true);
+      this.contactsData.splice(0,0,newContact[0]);
+
+    })
+
 
   }
   /* CLASS METHODS */
@@ -110,19 +118,17 @@ export class ContactCardComponent implements OnInit {
   onDeleteContactClick(contactId: string, index:number): void {
     console.log('index: ', index);
     console.log('contactId: ', contactId);
-    const url = this.http.deleteContact(contactId,index);
+    const deleteObservable = this.http.deleteContact(contactId,index);
     // this.contactsData
 
-    this.contactsData.splice(index,1);
+    deleteObservable.subscribe(resp=>{
+      console.log(resp.res.deletedCount);
+      this.contactsData.splice(index,1);
+      this.deleteMode=false;
+    },err=>console.error(err))
+
+
     //.delete(this.buildUrl('get-contacts')+"/?delete_contact:${contactId}")
 
   }
-
-
-
 }
-
-
-// this.msgService.subScribeToNewCtontacts().subscribe(this.appendInsertedRecord);
-// return;
-

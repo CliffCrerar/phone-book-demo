@@ -14,7 +14,7 @@
 
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Inject } from '@angular/core';
-import { Subscribable } from 'rxjs';
+import { Subscribable, Observable, Subject } from 'rxjs';
 import { ContactModel, PostNewContact } from '../_models/contact.model';
 import { environment as env } from 'src/environments/environment';
 import { NewContact } from '../_models/new-contact-form.model';
@@ -22,12 +22,14 @@ import { UrlSerializer, UrlTree } from '@angular/router';
 import { ParseError, Serializer } from '@angular/compiler';
 
 @Inject({ providedIn: 'root' })
-export class HttpService{
+export class HttpService {
   /* CLASS ATTRIBUTES */
   httpGetAllSubscribable: Subscribable<{ table: ContactModel[] }>;
   httpPutNewRecord: Subscribable<any>;
   mainDataSet: ContactModel[];
   maxIdNo = 0;
+  thisPostBody:ContactModel;
+  newContactSubject=new Subject<PostNewContact>();
 
 
   /* CLASS CONSTRUCTOR */
@@ -39,8 +41,12 @@ export class HttpService{
     this.httpGetAllSubscribable.subscribe(data => {
 
       this.mainDataSet = data.table
-      this.maxIdNo = data.table.length+1
+      this.maxIdNo = data.table.length + 1
     });
+
+
+    // Instantiate observable
+    this.httpPutNewRecord = new Observable();
 
   }
   /* CLASS METHODS */
@@ -91,21 +97,35 @@ export class HttpService{
     this.maxIdNo++
     // this.http.post<PostNewContact>(this.buildUrl('postContact'),postBody,this.headerPostNewContact());
     console.log('postBody: ', PostBody);
-    return this.http.put<PostNewContact>(
+    // this.thisPostBody=PostBody;
+    this.httpPutNewRecord =
+    this.http.put<PostNewContact>(
       this.buildUrl('postContact', false),
       PostBody,
-      this.headerPostNewContact()
-    );
-
+      this.headerPostNewContact())
+    return this.httpPutNewRecord;
   }
+
   /**
  * TODO:
  */
-  deleteContact(contactId: string, index: number): HttpResponse {
+  deleteContact(contactId: string, index: number): Subscribable<any> {
     console.log('httpDeleteContact', contactId);
-    const deleteContactUrl = this.buildUrl("deleteContact",true);
+    const deleteContactUrl = this.buildUrl("deleteContact", false);
     console.log('deleteContactUrl: ', deleteContactUrl);
     console.log('this.buildUrl: ', this.buildUrl);
-    return this.http.delete(deleteContactUrl);
+    return this.http.delete(`${deleteContactUrl}&delete_record=${contactId}`);
+  }
+
+  /**
+   * TODO: push new contacts back to components
+   *
+   */
+  getNewContactCard():Subject<any>{
+    return this.newContactSubject;
+  }
+
+  pushNewContactData(newContact: PostNewContact):void{
+    return this.newContactSubject.next(newContact);
   }
 }

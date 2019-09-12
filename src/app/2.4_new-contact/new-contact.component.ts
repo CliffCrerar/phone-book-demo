@@ -3,7 +3,7 @@ import { NewContact } from '../_models/new-contact-form.model';
 import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 import { HttpService } from '../_services/http.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Unsubscribable, PartialObserver } from 'rxjs';
+import { Unsubscribable, PartialObserver, Subscriber,Subscribable, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-contact',
@@ -14,22 +14,24 @@ export class NewContactComponent implements OnInit {
   /* CLASS ATTRIBUTES */
   display = false;
   formDefinition: NewContact[] = [];
-  // Dev variables
-  // fn = 'Cliff';
-  // ls = 'Crerar';
-  // ph = '131-231-2312';
-  // em = 'cliff@cliff.cliff';
+  postNewContactObservable
+  slideOut;
+//  Dev variables
+  fn = 'Cliff';
+  ls = 'Crerar';
+  ph = '131-231-2312';
+  em = 'cliff@cliff.cliff';
   /* CLASS CONSTRUCTOR */
   constructor(private msgService: InterComponentCommsService, private httpService: HttpService) {
-    // this.addInput('FirstName', 'First Name', this.fn);
-    // this.addInput('LastName', 'Last Name', this.ls);
-    // this.addInput('Phone', 'Phone Number', this.ph);
-    // this.addInput('Email', 'Email Address', this.em);
+    this.addInput('FirstName', 'First Name', this.fn);
+    this.addInput('LastName', 'Last Name', this.ls);
+    this.addInput('Phone', 'Phone Number', this.ph);
+    this.addInput('Email', 'Email Address', this.em);
 
-    this.addInput('FirstName', 'First Name');
-    this.addInput('LastName', 'Last Name');
-    this.addInput('Phone', 'Phone Number');
-    this.addInput('Email', 'Email Address');
+      // this.addInput('FirstName', 'First Name');
+      // this.addInput('LastName', 'Last Name');
+      // this.addInput('Phone', 'Phone Number');
+      // this.addInput('Email', 'Email Address');
   }
   /* ON INIT HOOK */
   ngOnInit() {
@@ -67,15 +69,18 @@ export class NewContactComponent implements OnInit {
       .subscribe(
         response => this.handleInsertResponse(response),
         respError => this.handleInsertContactError(respError) );
-    return;
+    // return;
   }
 
   /**
    * @description handles the server response if successful
    */
-  handleInsertResponse(response: PartialObserver<any>): void {
+  handleInsertResponse(response: any): void {
     //TODO:
     // return response.opt[0];
+
+    console.log(response.res.ops.new=true);
+    this.httpService.pushNewContactData(response.res.ops)
   }
 
 
@@ -93,7 +98,12 @@ export class NewContactComponent implements OnInit {
    * TODO: slide out form like it slides in
    */
   cancelNewContact(): void {
-    this.display = false;
+    this.slideOut = 'slideOutLeft'
+    setTimeout(() => {
+      this.display = false;
+      this.slideOut = ''
+    }, 2000);
+
     return;
   }
 

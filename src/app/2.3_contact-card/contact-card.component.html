@@ -18,8 +18,13 @@ TEMPLATE: Contact Card
         <nb-card-front> -->
     <!-- CARD FRONT -->
     <nb-card *ngFor="let contact of contactsData;let i = index" class="animated zoomIn">
-        <nb-card-header class="contact-card-header">
-            <h5>{{contact.FirstName}} {{contact.LastName}}</h5>
+        <nb-card-header class="contact-card-header position-relative">
+
+            <div class="d-flex justify-content-between w-100">
+                <h5>{{contact.FirstName}} {{contact.LastName}}</h5>
+                <div>{{i+1}}/{{contactsData.length}}</div>
+            </div>
+            <nb-badge *ngIf="contact.new !== undefined" style="z-index: 1100" text="NEW!"></nb-badge>
         </nb-card-header>
         <nb-card-body>
             <p><strong>{{phoneNumberCaption}}</strong>: {{contact.Phone}}</p>
@@ -35,7 +40,7 @@ TEMPLATE: Contact Card
                 </div>
 
                 <div>
-                    <button class="align-self-end" size="small" status="success" outline nbButton>
+                    <button nbTooltipPlacement="bottom" nbTooltip="Click to edit card" nbTooltipTrigger="hover" class="align-self-end" size="small" status="success" outline nbButton>
                     <nb-icon icon="edit-outline"></nb-icon>
                   </button>
                 </div>
