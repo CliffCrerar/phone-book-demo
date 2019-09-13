@@ -49,8 +49,6 @@ export class ContactCardComponent implements OnInit {
       return this.deleteMode = !this.deleteMode;
     }
 
-
-
     this.interValInject = (): void => {
       this.loadingProgress++;
       // tslint:disable-next-line:no-unused-expression
@@ -65,7 +63,6 @@ export class ContactCardComponent implements OnInit {
           case 100: this.loadingElementShow = false; break;
         }
       }).call(this);
-
     };
     this.handleSubscriptionEmission = data => {
       console.log(data);
@@ -92,18 +89,9 @@ export class ContactCardComponent implements OnInit {
     this.http.getNewContactCard().subscribe(newContact=>{
       console.log('newContact: ', newContact[0].new = true);
       this.contactsData.splice(0,0,newContact[0]);
-
     })
-
-
   }
   /* CLASS METHODS */
-  /**
-   * TODO:
-   */
-  // appendInsertedRecord(newContact: ContactModel): void {
-  // this.contactsData.push(newContact.opt[0]);
-  // }
 
   /**
    * TODO:
@@ -126,9 +114,14 @@ export class ContactCardComponent implements OnInit {
       this.contactsData.splice(index,1);
       this.deleteMode=false;
     },err=>console.error(err))
+  }
 
-
-    //.delete(this.buildUrl('get-contacts')+"/?delete_contact:${contactId}")
-
+  /**
+   * @description edit card
+   */
+  editContact(flipped:boolean):void{
+    console.log('click');
+    this.cardFlipped = true;
+    return;
   }
 }

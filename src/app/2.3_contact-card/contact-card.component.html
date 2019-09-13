@@ -17,37 +17,54 @@ TEMPLATE: Contact Card
     <!-- <nb-flip-card>
         <nb-card-front> -->
     <!-- CARD FRONT -->
-    <nb-card *ngFor="let contact of contactsData;let i = index" class="animated zoomIn">
-        <nb-card-header class="contact-card-header position-relative">
+    <nb-reveal-card [showToggleButton]="toggle" *ngFor="let contact of contactsData;let i = index" class="animated zoomIn">
+        <nb-card-front>
+            <nb-card>
+                <nb-card-header class="contact-card-header position-relative">
 
-            <div class="d-flex justify-content-between w-100">
-                <h5>{{contact.FirstName}} {{contact.LastName}}</h5>
-                <div>{{i+1}}/{{contactsData.length}}</div>
-            </div>
-            <nb-badge *ngIf="contact.new !== undefined" style="z-index: 1100" text="NEW!"></nb-badge>
-        </nb-card-header>
-        <nb-card-body>
-            <p><strong>{{phoneNumberCaption}}</strong>: {{contact.Phone}}</p>
-            <p><strong>{{emailAddressCaption}}</strong>: {{contact.Email}}</p>
-        </nb-card-body>
-        <nb-card-footer>
-            <div class="d-flex flex-row justify-content-between w-100">
+                    <div class="d-flex justify-content-between w-100">
+                        <h5>{{contact.FirstName}} {{contact.LastName}}</h5>
+                        <div>{{i+1}}/{{contactsData.length}}</div>
+                    </div>
+                    <nb-badge *ngIf="contact.new !== undefined" style="z-index: 1100" text="NEW!"></nb-badge>
+                </nb-card-header>
+                <nb-card-body>
+                    <p><strong>{{phoneNumberCaption}}</strong>: {{contact.Phone}}</p>
+                    <p><strong>{{emailAddressCaption}}</strong>: {{contact.Email}}</p>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div class="d-flex flex-row justify-content-between w-100">
 
-                <div>
-                    <button class="animated zoomIn" (click)="onDeleteContactClick(contact._id,i)" *ngIf="deleteMode" size="small" status="danger" hero nbButton>
+                        <div>
+                            <button class="animated zoomIn" (click)="onDeleteContactClick(contact._id,i)" *ngIf="deleteMode" size="small" status="danger" hero nbButton>
                     <nb-icon icon="trash-2-outline"></nb-icon>
                   </button>
-                </div>
+                        </div>
 
-                <div>
-                    <button nbTooltipPlacement="bottom" nbTooltip="Click to edit card" nbTooltipTrigger="hover" class="align-self-end" size="small" status="success" outline nbButton>
+                        <div>
+                            <button nbTooltipPlacement="bottom" nbTooltip="Click to edit card" nbTooltipTrigger="hover" class="align-self-end" size="small" status="success" outline nbButton (click)="editContact(cardFlipped)">
                     <nb-icon icon="edit-outline"></nb-icon>
                   </button>
-                </div>
+                        </div>
 
-            </div>
-        </nb-card-footer>
-    </nb-card>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </nb-card-front>
+        <nb-card-back revealed="cardFlipped">
+            <nb-card-header>
+                header
+            </nb-card-header>
+            <nb-card>
+                <nb-card-body>
+                    Back
+                </nb-card-body>
+            </nb-card>
+            <nb-card-footer>
+                footer
+            </nb-card-footer>
+        </nb-card-back>
+    </nb-reveal-card>
     <!-- </nb-card-front> -->
     <!-- CARD BACK -->
 

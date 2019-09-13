@@ -114,7 +114,7 @@ export class HttpService {
     const deleteContactUrl = this.buildUrl("deleteContact", false);
     console.log('deleteContactUrl: ', deleteContactUrl);
     console.log('this.buildUrl: ', this.buildUrl);
-    return this.http.delete(`${deleteContactUrl}&delete_record=${contactId}`);
+    return this.http.delete(`${deleteContactUrl}&delete_record=${contactId}`,this.headerGetAllRecords());
   }
 
   /**

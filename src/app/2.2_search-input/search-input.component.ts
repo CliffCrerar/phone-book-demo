@@ -11,6 +11,7 @@ export class SearchInputComponent implements OnInit {
   /* CLASS ATTRIBUTES */
   inputDisplay = 'hidden';
   subHeaderTitle: string;
+  search = false;
 
   /* CLASS CONSTRUCTOR */
   constructor(private uiService: AppDataService, private msgService: InterComponentCommsService) {
@@ -19,6 +20,7 @@ export class SearchInputComponent implements OnInit {
   /* INIT HOOK */
   ngOnInit() {
     this.msgService.subScribeToMessages().subscribe(msg => {
+      console.log('msg: ', msg);
       switch (msg) {
         case 'search': this.toggleSearchInput();
       }
@@ -27,8 +29,13 @@ export class SearchInputComponent implements OnInit {
 
   /* CLASS METHODS */
 
-  toggleSearchInput(): string {
-    return this.inputDisplay === 'hidden' ? this.inputDisplay = 'visible' : this.inputDisplay = 'hidden';
+  toggleSearchInput(): void {
+    console.log('search: ', this.search);
+
+    this.search = !this.search;
+
+    return
+    //this.inputDisplay === 'hidden' ? this.inputDisplay = 'visible' : this.inputDisplay = 'hidden';
   }
 
 }

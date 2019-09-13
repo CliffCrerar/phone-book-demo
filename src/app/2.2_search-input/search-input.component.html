@@ -1,11 +1,21 @@
-<!-- *************************************** 
+<!-- ***************************************
 TEMPLATE: Search input
 *************************************** -->
 <div class="d-flex justify-content-between w-100 align-items-center">
     <div>
         <h1 style="font-family: Poiret One !important; font-weight: bold;" class="sub-header text-white w-100">{{subHeaderTitle}}</h1>
     </div>
-    <div>
-        <input [ngClass]="inputDisplay" type="text" nbInput fullWidth shape="round" placeholder="Round">
+    <div class="d-flex;">
+        <div>
+            <nb-icon icon='search-outline'></nb-icon>
+        </div>
+        <div>
+            <label> 
+              <span>
+                  
+              </span>
+            </label>
+            <input id="search-contact" *ngIf="search" class="animated slideInRight" type="text" nbInput fullWidth shape="round" placeholder="" />
+        </div>
     </div>
 </div>
