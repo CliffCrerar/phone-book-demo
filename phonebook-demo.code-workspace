@@ -13,16 +13,12 @@
     "settings": {
         "workbench.colorTheme": "Shark Dark",
 		"workbench.iconTheme": "simple-icons",
-		"html.format.wrapAttributes": "aligned-multiple",
+		"html.format.wrapAttributes": "force-expand-multiline",
 		"typescript.implementationsCodeLens.enabled": true,
 		"angular-template-formatter.closeTagSameLine": true,
 		"html.format.indentInnerHtml": true		,
 		"angular-template-formatter.indentWidth": 2,
 		"angular-template-formatter.useSpaces": true,
-		"typescript.implementationsCodeLens.enabled": true,
-		"html.format.enable": false,
-		"angular-template-formatter.indentWidth": 2,
-		"angular-template-formatter.useSpaces": true,
-		"typescript.implementationsCodeLens.enabled": true,
+		"html.format.enable": false
     }
 }

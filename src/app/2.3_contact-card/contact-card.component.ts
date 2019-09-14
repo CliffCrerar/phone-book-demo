@@ -5,7 +5,7 @@ import { AppDataService } from '../_services/display-data.service';
 import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 import { HttpResponse } from '@angular/common/http';
 import { Subscriber } from 'rxjs';
-import { NbFlipCardComponent } from '@nebular/theme';
+import { NbFlipCardComponent, NbRevealCardComponent } from '@nebular/theme';
 
 @Component({
   selector: 'app-contact-card',
@@ -122,7 +122,7 @@ export class ContactCardComponent implements OnInit {
    */
   editContact(flipCard: NbFlipCardComponent ):void{
     //flipCard.flipped = true
-    flipCard.revealed = true;
+    flipCard.flipped = true;
     console.log('flipCard: ', flipCard);
 
 
