@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, Event } from '@angular/router';
+import process from 'process'
+
 
 @Component({
   selector: 'app-root',
@@ -10,10 +12,13 @@ import { Router, NavigationEnd, Event } from '@angular/router';
 export class AppComponent implements OnInit {
   /* CLASS ATTRIBUTES */
   _loginBackground: Element;
-  
+
   /* CLASS CONSTRUCTOR */
   constructor(private _title: Title, private _router: Router) {
-    this._title.setTitle('Phone Book'); // set the title to the initial 'Phone Book'
+    //this._title.setTitle('Phone Book'); // set the title to the initial 'Phone Book'
+    //process.env.NODE_ENV="development";
+    console.log('process: ', process);
+
     return;
   }
 

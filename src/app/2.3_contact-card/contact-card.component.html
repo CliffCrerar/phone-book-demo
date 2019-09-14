@@ -1,7 +1,8 @@
 <!-- ***************************************
 TEMPLATE: Contact Card
 *************************************** -->
-<div class="data-loader" *ngIf="loadingElementShow">
+<!-- <div class="data-loader" *ngIf="loadingElementShow"> -->
+<div class="data-loader" *ngIf="false">
     <img src="../../assets/wait-cards-loader.png" class="img-fluid cloud-loader" alt="cloud loader">
     <p>{{loadMessages}}</p>
     <!-- <span class="dot1 animated zoomIn">.</span> -->
@@ -17,7 +18,7 @@ TEMPLATE: Contact Card
     <!-- <nb-flip-card>
         <nb-card-front> -->
     <!-- CARD FRONT -->
-    <nb-reveal-card [showToggleButton]="toggle" *ngFor="let contact of contactsData;let i = index" class="animated zoomIn">
+    <nb-reveal-card [showToggleButton]="toggle" *ngFor="let contact of contactsData;let i = index" class="animated zoomIn" #editCardFlip revealed="">
         <nb-card-front>
             <nb-card>
                 <nb-card-header class="contact-card-header position-relative">
@@ -42,7 +43,7 @@ TEMPLATE: Contact Card
                         </div>
 
                         <div>
-                            <button nbTooltipPlacement="bottom" nbTooltip="Click to edit card" nbTooltipTrigger="hover" class="align-self-end" size="small" status="success" outline nbButton (click)="editContact(cardFlipped)">
+                            <button nbTooltipPlacement="bottom" nbTooltip="Click to edit card" nbTooltipTrigger="hover" class="align-self-end" size="small" status="success" outline nbButton (click)="editContact(editCardFlip)">
                     <nb-icon icon="edit-outline"></nb-icon>
                   </button>
                         </div>
@@ -51,19 +52,22 @@ TEMPLATE: Contact Card
                 </nb-card-footer>
             </nb-card>
         </nb-card-front>
-        <nb-card-back revealed="cardFlipped">
-            <nb-card-header>
-                header
-            </nb-card-header>
+        <nb-card-back>
             <nb-card>
-                <nb-card-body>
-                    Back
-                </nb-card-body>
+                <nb-card-header>
+                    header
+                </nb-card-header>
+                <nb-card>
+                    <nb-card-body>
+                        Back
+                    </nb-card-body>
+                </nb-card>
+                <nb-card-footer>
+                    footer
+                </nb-card-footer>
             </nb-card>
-            <nb-card-footer>
-                footer
-            </nb-card-footer>
         </nb-card-back>
+
     </nb-reveal-card>
     <!-- </nb-card-front> -->
     <!-- CARD BACK -->

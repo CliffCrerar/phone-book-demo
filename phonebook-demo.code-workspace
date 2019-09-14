@@ -16,6 +16,13 @@
 		"html.format.wrapAttributes": "aligned-multiple",
 		"typescript.implementationsCodeLens.enabled": true,
 		"angular-template-formatter.closeTagSameLine": true,
-		"html.format.indentInnerHtml": true		
+		"html.format.indentInnerHtml": true		,
+		"angular-template-formatter.indentWidth": 2,
+		"angular-template-formatter.useSpaces": true,
+		"typescript.implementationsCodeLens.enabled": true,
+		"html.format.enable": false,
+		"angular-template-formatter.indentWidth": 2,
+		"angular-template-formatter.useSpaces": true,
+		"typescript.implementationsCodeLens.enabled": true,
     }
 }

@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
 import { HttpService } from '../_services/http.service';
 import { ContactsDisplayModel, ContactModel } from '../_models/contact.model';
 import { AppDataService } from '../_services/display-data.service';
 import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 import { HttpResponse } from '@angular/common/http';
 import { Subscriber } from 'rxjs';
+import { NbFlipCardComponent } from '@nebular/theme';
 
 @Component({
   selector: 'app-contact-card',
@@ -21,7 +22,7 @@ export class ContactCardComponent implements OnInit {
   private handleSubscriptionEmission;
   private handelDeleteMode;
   private deleteModeToggle;
-  public cardFlipped = false;
+  // public cardFlipped = false;
   public toggle = false;
   public loadingProgress = 0;
   public interValInject;
@@ -97,7 +98,7 @@ export class ContactCardComponent implements OnInit {
    * TODO:
    */
   onClickflipCard(): void {
-    this.cardFlipped = true;
+    //this.cardFlipped = true;
   }
 
   /**
@@ -119,9 +120,20 @@ export class ContactCardComponent implements OnInit {
   /**
    * @description edit card
    */
-  editContact(flipped:boolean):void{
-    console.log('click');
-    this.cardFlipped = true;
+  editContact(flipCard: NbFlipCardComponent ):void{
+    //flipCard.flipped = true
+    flipCard.revealed = true;
+    console.log('flipCard: ', flipCard);
+
+
     return;
+  }
+
+  /**
+   * @description save or cancel card update
+   */
+  updateCard(...params):void{
+    console.log(params)
+
   }
 }

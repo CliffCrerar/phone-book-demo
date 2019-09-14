@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --hmr=true --prod=false --sourceMap=true  --progress=true --verbose=true",
+        "start": "ng serve --hmr=true --prod=false --sourceMap=true  --progress=true --verbose=false",
         "build": "ng build --buildOptimizer=true --deleteOutputPath=true --extractCss=true --prod=true --progress=true --sourceMap=true --commonChunk=true",
         "test": "ng test",
         "lint": "ng lint",
@@ -36,7 +36,7 @@
         "@schematics/angular": "~8.3.3",
         "@types/jasmine": "~3.3.8",
         "@types/jasminewd2": "~2.0.3",
-        "@types/node": "~8.9.4",
+        "@types/node": "^8.9.5",
         "codelyzer": "^5.0.0",
         "jasmine-core": "~3.4.0",
         "jasmine-spec-reporter": "~4.2.1",
