@@ -23,6 +23,7 @@ import { AppDataService } from './_services/display-data.service';
 import { HttpService } from './_services/http.service';
 import { InterComponentCommsService } from './_services/intercomp-comms.service';
 import { NewContactComponent } from './2.4_new-contact/new-contact.component';
+import {HaveSomeToastService} from './_services/toaster.service';
 
 @NgModule({
   /* DECLARATIONS */
@@ -60,7 +61,7 @@ import { NewContactComponent } from './2.4_new-contact/new-contact.component';
     // Nebular Modules
   ],
   /* PROVIDERS */
-  providers: [AppDataService, HttpService, InterComponentCommsService,NbToastrService],
+  providers: [AppDataService, HttpService, InterComponentCommsService,NbToastrService,HaveSomeToastService],
   /* APP STRAP */
   bootstrap: [AppComponent]
 })

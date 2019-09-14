@@ -18,9 +18,9 @@ TEMPLATE: Contact Card
 <div class="card-grid" *ngIf="!loadingElementShow">
 
     <!-- CARD FRONT -->
-    <nb-flip-card [showToggleButton]="toggle" *ngFor="let contact of contactsData;let i = index" class="animated zoomIn" #editCardFlip revealed="">
+    <nb-flip-card  [showToggleButton]="toggle" *ngFor="let contact of contactsData;let i = index" class="animated zoomIn" #editCardFlip >
         <nb-card-front>
-            <nb-card>
+            <nb-card #mousOver [accent]="mousOver.accent" (mouseleave)="mousOver.accent=''"  (mouseover)="mousOver.accent='success'">
                 <nb-card-header class="contact-card-header">
 
                     <div class="d-flex justify-content-between w-100">
@@ -36,12 +36,12 @@ TEMPLATE: Contact Card
                 <nb-card-footer>
                     <div class="d-flex flex-row justify-content-between w-100">
                         <div>
-                            <button class="animated zoomIn" (click)="onDeleteContactClick(contact._id,i)" *ngIf="deleteMode" size="small" status="danger" hero nbButton>
+                            <button class="animated zoomIn" nbTooltip="Permanently delete, non reversible action" nbTooltipPlacement="bottom" (click)="onDeleteContactClick(contact._id,i)" *ngIf="deleteMode" size="small" status="danger" hero nbButton>
                     <nb-icon icon="trash-2-outline"></nb-icon>
                   </button>
                         </div>
                         <div>
-                            <button nbTooltipPlacement="bottom" nbTooltip="Click to edit card" nbTooltipTrigger="hover" class="align-self-end" size="small" status="success" outline nbButton (click)="editContact(editCardFlip)">
+                            <button [ngClass]="mousOver.accent==='success'? 'display-edit':'hide-edit'"  nbTooltipPlacement="bottom" nbTooltip="Click to edit card" nbTooltipTrigger="hover" class="align-self-end" size="small" status="success" outline nbButton (click)="editContact(editCardFlip)">
                     <nb-icon icon="edit-outline"></nb-icon>
                   </button>
                         </div>
@@ -49,49 +49,50 @@ TEMPLATE: Contact Card
                 </nb-card-footer>
             </nb-card>
         </nb-card-front>
+        <!-- UPDATE FORM -->
         <nb-card-back>
-            <nb-card>
+            <nb-card accent="danger">
                 <nb-card-header>
+                    <form #updateForm>
+                        <div class="d-flex flex-row justify-content-between w-100 align-items-center">
+                            <div ngClass="first-name-last-name-elements">
+                                <label for="#editFirstName">FirstName</label>
+                                <input [(ngModel)]="contact.FirstName"  id="editFirstName"  type="text"  nbInput fieldSize="small" data-value="{{contact.FirstName}}" name="FirstName">
+                            </div>
 
-                    <div class="d-flex flex-row justify-content-between w-100 align-items-center">
-                        <div style="flex: 1 !important">
-                            <!-- <label for="#editFirstName">FirstName</label> -->
-                            <input [(ngModel)]="contact.FirstName"  id="editFirstName"  type="text"  nbInput fieldSize="small" data-value="{{contact.FirstName}}" name="FirstName">
+                            <div ngClass="first-name-last-name-elements">
+                                <label for="#editLastName">LastName</label>
+                                <input [(ngModel)]="contact.LastName"  id="editLastName"  type="text"  nbInput fieldSize="small" data-value="{{contact.LastName}}" name="LastName">
+                            </div>
                         </div>
-
-                        <div style="flex: 1 !important">
-                            <!-- <label for="#editLastName">LastName</label> -->
-                            <input [(ngModel)]="contact.LastName"  id="editLastName"  type="text"  nbInput fieldSize="small" data-value="{{contact.LastName}}" name="LastName">
-                        </div>
-                    </div>
-
+                    </form>
                 </nb-card-header>
                 <nb-card-body>
 
-                    <div>
-                        <div>
+                    <div class="d-flex flex-row justify-content-between w-100 align-items-center">
+                        <div ngClass="phone-email-elements">
                             <label for="#editPhone">Phone</label>
                                 <input size="editPhone" name="Phone"  [(ngModel)]="contact.Phone"  fieldSize="small"  type="text"  nbInput placeholder="Name" data-value="{{contact.Phone}}">
                         </div>
 
-                        <div>
+                        <div ngClass="phone-email-elements">
                             <label for="#editEmail">Email</label>
                                 <input id="editEmail" name="Email"  fieldSize="small"  type="email"  nbInput [(ngModel)]="contact.Email" data-value="{{contact.Email}}">
                         </div>
                     </div>
 
                 </nb-card-body>
-                <nb-card-footer>
+                <nb-card-footer class="w-100">
 
-                    <div class="d-flex flex-row justify-content-between w-100 align-items-center">
+                    <div class="d-flex flex-row justify-content-between align-items-center">
                         <div>
-                            <button nbButton size="small"  status="warning"  hero (click)="updateCard('CANCEL')">
+                            <button nbButton size="small" nbTooltipPlacement="bottom" nbTooltip="Any updates will not be lost"  status="warning"  hero (click)="updateCard(editCardFlip,'CANCEL')">
                                 <nb-icon icon="slash-outline"></nb-icon>
                                     </button>
                         </div>
 
                         <div>
-                            <button nbButton size="small"  status="success"  hero (click)="updateCard(contact)">
+                            <button nbButton size="small" nbTooltip="Save your changes permanently" nbTooltipPlacement="bottom"  status="success"  hero (click)="updateCard(editCardFlip,contact,updateForm)">
                                 <nb-icon icon="save-outline"></nb-icon>
                                     </button>
                         </div>

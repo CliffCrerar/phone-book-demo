@@ -6,6 +6,7 @@ import { InterComponentCommsService } from '../_services/intercomp-comms.service
 import { HttpResponse } from '@angular/common/http';
 import { Subscriber } from 'rxjs';
 import { NbFlipCardComponent, NbRevealCardComponent } from '@nebular/theme';
+import { HaveSomeToastService } from '../_services/toaster.service';
 
 @Component({
   selector: 'app-contact-card',
@@ -30,12 +31,15 @@ export class ContactCardComponent implements OnInit {
   public loadingElementShow = true;
   public httpResponse: HttpResponse<any>;
   public slideOut:string;
-  deleteObservable = new Subscriber<HttpResponse<any>>();
+  public deleteObservable = new Subscriber<HttpResponse<any>>();
+  public fNameLNameNg = "flex:1 !important"
+  public mouseOverAccent: string;
   /* CLASS CONSTRUCTOR */
   constructor(
     private uiService: AppDataService,
     private http: HttpService,
-    private msgService: InterComponentCommsService
+    private msgService: InterComponentCommsService,
+    private toasterService: HaveSomeToastService
   ) {
     this.phoneNumberCaption = this.uiService.getGeneralData().phoneNumberCaption;
     this.emailAddressCaption = this.uiService.getGeneralData().emailAddressCaption;
@@ -120,12 +124,10 @@ export class ContactCardComponent implements OnInit {
   /**
    * @description edit card
    */
-  editContact(flipCard: NbFlipCardComponent ):void{
+  editContact(flipCardRef: NbFlipCardComponent ):void{
     //flipCard.flipped = true
-    flipCard.flipped = true;
-    console.log('flipCard: ', flipCard);
-
-
+    flipCardRef.flipped = true;
+    console.log('flipCard: ', flipCardRef);
     return;
   }
 
@@ -134,6 +136,22 @@ export class ContactCardComponent implements OnInit {
    */
   updateCard(...params):void{
     console.log(params)
+    const flipCardRef = params[0];
+    // Display message and end procedure on cancel click
+    if(params[1]==='CANCEL'){
+      this.runOnUpdateCancel();
+      flipCardRef.flipped = false;
+      console.log('params[1]: ', );
+      return;
+    }
+    // On update click call http service and update database
+  }
 
+  /**
+   * @description Cancel card update action
+   */
+  runOnUpdateCancel():void{
+    this.toasterService.getSomeToast();
+    
   }
 }
