@@ -7,6 +7,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Subscriber } from 'rxjs';
 import { NbFlipCardComponent, NbRevealCardComponent, NbToastRef, NbCardComponent } from '@nebular/theme';
 import { HaveSomeToastService } from '../_services/toaster.service';
+import {environment} from '../../environments/environment';
+
 
 @Component({
   selector: 'app-contact-card',
@@ -28,7 +30,7 @@ export class ContactCardComponent implements OnInit {
   public loadingProgress = 0;
   public interValInject;
   public loadMessages = 'Welcome';
-  public loadingElementShow = true;
+  public loadingElementShow = environment.production;
   public httpResponse: HttpResponse<any>;
   public slideOut: string;
   public deleteObservable = new Subscriber<HttpResponse<any>>();
@@ -41,6 +43,7 @@ export class ContactCardComponent implements OnInit {
     private msgService: InterComponentCommsService,
     private toasterService: HaveSomeToastService
   ) {
+    console.log('environment: ', );
     this.phoneNumberCaption = this.uiService.getGeneralData().phoneNumberCaption;
     this.emailAddressCaption = this.uiService.getGeneralData().emailAddressCaption;
 

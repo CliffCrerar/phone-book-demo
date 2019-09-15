@@ -139,10 +139,9 @@ export class HttpService {
     const updatedDate = new Date().toDateString();
     const { _id, FirstName, LastName, Email, Phone } = data;
     const updateDateBody = new PostUpdateContact(_id, updatedDate, FirstName, LastName, Email, Phone);
-    console.log('updateDateBody: ', updateDateBody);
-
-
-    // Observable<PostUpdateContact>
+    console.log('updateDateBody: ', updateDateBody,this.headerPostNewContact());
+    this.http.post(this.buildUrl('upsertContact'),updateDateBody).subscribe(res=>console.log(res));
+    
   }
 }
 

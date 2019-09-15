@@ -11,7 +11,7 @@
 		}
 	],
     "settings": {
-        "workbench.colorTheme": "Shark Smoke",
+        "workbench.colorTheme": "Dark+++",
 		"workbench.iconTheme": "simple-icons",
 		"html.format.wrapAttributes": "force-expand-multiline",
 		"typescript.implementationsCodeLens.enabled": true,
