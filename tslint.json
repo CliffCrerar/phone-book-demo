@@ -1,10 +1,15 @@
 {
   "extends": "tslint:recommended",
+  "paths":[
+    "./"
+  ],
   "rules": {
     "variable-name":{
-      "allow-leading-underscore",
-      "allow-pascal-case",
-      "allow-snake-case"
+      "options":[
+        "allow-leading-underscore",
+        "allow-pascal-case",
+        "allow-snake-case"
+      ]
     },
     "array-type": false,
     "arrow-parens": false,

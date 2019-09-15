@@ -37,7 +37,7 @@ export class NewContactComponent implements OnInit {
   ngOnInit() {
     // Listen for broadcasted messages
     this.msgService.subScribeToMessages().subscribe(msg => {
-      switch (msg) {
+      switch (msg.subject) {
         case 'add-contact': this.toggleAddContactForm();
       }
     });

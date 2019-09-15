@@ -7,7 +7,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Subscriber } from 'rxjs';
 import { NbFlipCardComponent, NbRevealCardComponent, NbToastRef, NbCardComponent } from '@nebular/theme';
 import { HaveSomeToastService } from '../_services/toaster.service';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
+import { ToastMessageModel } from '../_models/toastMessage.modal'
 
 
 @Component({
@@ -34,8 +35,32 @@ export class ContactCardComponent implements OnInit {
   public httpResponse: HttpResponse<any>;
   public slideOut: string;
   public deleteObservable = new Subscriber<HttpResponse<any>>();
-  public fNameLNameNg = "flex:1 !important"
+  public fNameLNameNg = 'flex:1 !important'
   public mouseOverAccent: string;
+  public toastMessages = ToastMessageModel;
+  private sendingUpdateToast = new ToastMessageModel(
+    'Sending update',
+    '',
+    'info',
+    'cloud-upload-outline');
+  private contactUpdatedToast = new ToastMessageModel(
+    'Contact Updated',
+    '',
+    'success',
+    'checkmark-outline');
+  // tslint:disable-next-line:max-line-length
+  private updateErrorToast = new ToastMessageModel(
+    'ERROR',
+    'Attempt to save record has failed, please contact support',
+    'danger',
+    'wifi-off-outline',
+    5000);
+  private updateCancelToast = new ToastMessageModel(
+    'Update was canceled',
+    '',
+    'warning',
+    'slash-outline'
+  );
   /* CLASS CONSTRUCTOR */
   constructor(
     private uiService: AppDataService,
@@ -43,19 +68,19 @@ export class ContactCardComponent implements OnInit {
     private msgService: InterComponentCommsService,
     private toasterService: HaveSomeToastService
   ) {
-    console.log('environment: ', );
+    console.log('environment: ');
     this.phoneNumberCaption = this.uiService.getGeneralData().phoneNumberCaption;
     this.emailAddressCaption = this.uiService.getGeneralData().emailAddressCaption;
 
     this.handelDeleteMode = (): void => {
       this.deleteModeToggle();
       return;
-    }
+    };
 
     this.deleteModeToggle = (): boolean => {
-      console.log("toggle delete mode");
+      console.log('toggle delete mode');
       return this.deleteMode = !this.deleteMode;
-    }
+    };
 
     this.interValInject = (): void => {
       this.loadingProgress++;
@@ -72,11 +97,13 @@ export class ContactCardComponent implements OnInit {
         }
       }).call(this);
     };
-    this.handleSubscriptionEmission = data => {
+    this.handleSubscriptionEmission = (data):void => {
       console.log(data);
-      this.contactsData = data.table.map(({ intId, FirstName, LastName, Phone, Email, _id }) => {
-        return new ContactsDisplayModel(FirstName, LastName, Phone, Email, intId, _id)
-      });
+      this.contactsData = data.table.
+        map(({ intId, FirstName, LastName, Phone, Email, _id }) => {
+          return new ContactsDisplayModel(FirstName, LastName, Phone, Email, intId, _id);
+        });
+      this.msgService.broadCastMessage({subject: 'contact-data', body: data});
     };
   }
   /* INIT HOOK */
@@ -88,8 +115,8 @@ export class ContactCardComponent implements OnInit {
     // Subscribe to broadcaster
     this.msgService.subScribeToMessages().subscribe(msg => {
       console.log(msg);
-      switch (msg) {
-        case "delete-contact": this.handelDeleteMode(); break;
+      switch (msg.subject) {
+        case 'delete-contact': this.handelDeleteMode(); break;
       }
     });
 
@@ -97,16 +124,14 @@ export class ContactCardComponent implements OnInit {
     this.http.getNewContactCard().subscribe(newContact => {
       console.log('newContact: ', newContact[0].new = true);
       this.contactsData.splice(0, 0, newContact[0]);
+    });
+    // Subscribe to http message
+    this.msgService.subscribeToFilterData().subscribe(filterData=>{
+      console.log(filterData);
+      this.contactsData = filterData;
     })
   }
   /* CLASS METHODS */
-
-  /**
-   * TODO:
-   */
-  onClickflipCard(): void {
-    //this.cardFlipped = true;
-  }
 
   /**
    * @description Removes card from database
@@ -121,7 +146,7 @@ export class ContactCardComponent implements OnInit {
       console.log(resp.res.deletedCount);
       this.contactsData.splice(index, 1);
       this.deleteMode = false;
-    }, err => console.error(err))
+    }, err => console.error(err));
   }
 
   /**
@@ -129,7 +154,6 @@ export class ContactCardComponent implements OnInit {
    */
   editContact(flipCardRef: NbFlipCardComponent): void {
     flipCardRef.flipped = true;
-    // console.log('flipCard: ', flipCardRef);
     return;
   }
 
@@ -137,30 +161,36 @@ export class ContactCardComponent implements OnInit {
    * @description save or cancel card update
    */
   onSaveOrCancelClick(...params): void {
-    console.log(params[2]);
     params[0].flipped = false;
-    // Display message and end procedure on cancel click
     if (params[1] === 'CANCEL') {
-      this.runOnUpdateCancel(params[0]);
-      return;
+      this.runOnUpdateCancel(params[0]); // pass to 
+    } else {
+      this.postUpdate(params[1]);
     }
-    this.http.postToDataBase(params[1]);
+    return;
   }
 
-  // /**
-  //  * @description Post to database
-  //  */
-  // postToDataBase():void{
-  //   //const toastRef: NbToastRef = () => this.
-  //   this.http.postToDataBase();
-  // }
+  /**
+   * @description post the update to the database
+   */
+  postUpdate(update: ContactModel): void {
+    this.toasterService.getSomeToast(this.sendingUpdateToast);
+    this.http.postToDataBase(update).subscribe(resp => {
+      this.toasterService.getSomeToast(this.contactUpdatedToast);
+      console.log(resp);
+    }, err => {
+      console.error(err);
+      // tslint:disable-next-line:max-line-length
+      this.toasterService.getSomeToast(this.updateErrorToast);
+    });
+  }
 
   /**
    * @description Cancel card update action
    */
   runOnUpdateCancel(flipCardRef: NbFlipCardComponent) {
-
-    this.toasterService.getSomeToast('This is cool', "poes", "default");
-    return
-  };
+    flipCardRef.flipped = false;
+    this.toasterService.getSomeToast(this.updateCancelToast);
+    return;
+  }
 }

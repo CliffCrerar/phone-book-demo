@@ -29,14 +29,22 @@ TEMPLATE: Contact Card
       class="animated zoomIn"
       #editCardFlip>
       <nb-card-front>
-        <nb-card
+        <nb-card 
+          class="contact-card"
           #mouseOver
           [accent]="mouseOver.accent"
           (mouseleave)="mouseOver.accent=''"
           (mouseover)="mouseOver.accent='success'">
           <nb-card-header class="contact-card-header">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between align-items-center">
+
+              <div>
+                <nb-icon
+                  height="200px"
+                  icon="person-outline"></nb-icon>
+              </div>
               <h5>{{contact.FirstName}} {{contact.LastName}}</h5>
+
               <div>{{i+1}}/{{contactsData.length}}</div>
             </div>
             <nb-badge
@@ -45,8 +53,24 @@ TEMPLATE: Contact Card
               text="NEW!"></nb-badge>
           </nb-card-header>
           <nb-card-body>
-            <p><strong>{{phoneNumberCaption}}</strong>: {{contact.Phone}}</p>
-            <p><strong>{{emailAddressCaption}}</strong>: {{contact.Email}}</p>
+            <p>
+              <strong>{{phoneNumberCaption}}</strong>: 
+              <span class="float-right">
+                  <nb-icon icon="phone-call-outline"></nb-icon>
+              </span>
+            </p>
+            <div class="pl-3">
+              <p>{{contact.Phone}}</p>
+            </div>
+            <p>
+              <strong>{{emailAddressCaption}}</strong>: 
+              <span class="float-right">
+                  <nb-icon icon="email-outline"></nb-icon>
+              </span>
+            </p>
+            <div class="pl-3">
+              <p>{{contact.Email}}</p>
+            </div>
           </nb-card-body>
           <nb-card-footer>
             <div class="d-flex flex-row justify-content-between">

@@ -77,7 +77,7 @@ export class SideNavControlsComponent implements OnInit {
 
     /* Handle Search bar Activate / deactivate switch */
     function handleSearchActivation() {
-      this.msgService.broadCastMessage('search'); // broadcast message
+      this.msgService.broadCastMessage({subject:'search'}); // broadcast message
       this.doc.querySelector('[title="Search"]').classList.add('toggle-on-color');
       console.log(this.sideNavControls);
     }
@@ -89,12 +89,12 @@ export class SideNavControlsComponent implements OnInit {
     }
     /* Handles the add contact action */
     function handelAddContactFormDisplay() {
-      this.msgService.broadCastMessage('add-contact');
+      this.msgService.broadCastMessage({subject:'add-contact'});
     }
     /* Handles delete contacts mode activation */
     function handelDeleteModeActivation() {
       console.log('DELETE MODE HANDLER');
-      this.msgService.broadCastMessage('delete-contact');
+      this.msgService.broadCastMessage({subject:'delete-contact'});
     }
   }
 }

@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms'
+import { FormsModule } from '@angular/forms'
 /* Submodules */
 import { AppRoutingModule } from 'src/app/zub-modules/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,7 +23,7 @@ import { AppDataService } from './_services/display-data.service';
 import { HttpService } from './_services/http.service';
 import { InterComponentCommsService } from './_services/intercomp-comms.service';
 import { NewContactComponent } from './2.4_new-contact/new-contact.component';
-import {HaveSomeToastService} from './_services/toaster.service';
+import { HaveSomeToastService } from './_services/toaster.service';
 
 @NgModule({
   /* DECLARATIONS */
@@ -62,7 +62,7 @@ import {HaveSomeToastService} from './_services/toaster.service';
     // Nebular Modules
   ],
   /* PROVIDERS */
-  providers: [AppDataService, HttpService, InterComponentCommsService,NbToastrService,HaveSomeToastService],
+  providers: [AppDataService, HttpService, InterComponentCommsService, NbToastrService, HaveSomeToastService],
   /* APP STRAP */
   bootstrap: [AppComponent]
 })
