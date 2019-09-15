@@ -8,7 +8,7 @@ import { AppRoutingModule } from 'src/app/zub-modules/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 /* Style framework modules */
 // tslint:disable-next-line: max-line-length
-import { NbLayoutModule, NbIconModule, NbButtonModule, NbCardModule, NbThemeModule, NbSidebarModule, NbToastrModule, NbMenuModule, NbInputModule, NbProgressBarModule, NbToastrService, NbTooltipModule, NbBadgeModule, NbGlobalPositionStrategy, NbGlobalPhysicalPosition, NbGlobalLogicalPosition } from '@nebular/theme';
+import { NbLayoutModule, NbIconModule, NbButtonModule, NbCardModule, NbThemeModule, NbSidebarModule, NbToastrModule, NbMenuModule, NbInputModule, NbProgressBarModule, NbToastrService, NbTooltipModule, NbBadgeModule, NbGlobalPositionStrategy, NbGlobalPhysicalPosition, NbGlobalLogicalPosition, NbSpinnerModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 /* Developed components */
 import { AppComponent } from './app.component';
@@ -58,6 +58,7 @@ import { HaveSomeToastService } from './_services/toaster.service';
     NbProgressBarModule,
     NbTooltipModule,
     NbBadgeModule,
+    NbSpinnerModule
     // NbToastrService,
     // Nebular Modules
   ],

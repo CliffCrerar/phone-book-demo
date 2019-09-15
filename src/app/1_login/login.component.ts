@@ -12,22 +12,25 @@ export class LoginComponent implements OnInit {
   /* CLASS ATTRIBUTES */
   appName: string;
   supportLink: string;
+  loading: boolean;
   /* CLASS CONSTRUCTOR */
   constructor(
-    private uiService: AppDataService, 
+    private uiService: AppDataService,
     private toastService: NbToastrService,
     private _router: Router
-    ) {
+  ) {
+    this.loading = false;
     this.appName = this.uiService.getGeneralData().AppName;
     this.supportLink = this.uiService.getGeneralData().SupportLink;
   }
   /* INIT HOOK */
-  ngOnInit():void {
+  ngOnInit(): void {
   }
 
   /* CLASS METHODS */
 
-  enterSetCookie():void {
+  enterSetCookie(): void {
+    this.loading = true;
     setTimeout(() => {
       this._router.navigate(['/app']);
     }, 3000);

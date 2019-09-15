@@ -3,7 +3,9 @@ import { NewContact } from '../_models/new-contact-form.model';
 import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 import { HttpService } from '../_services/http.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Unsubscribable, PartialObserver, Subscriber,Subscribable, Observable } from 'rxjs';
+import { Unsubscribable, PartialObserver, Subscriber, Subscribable, Observable } from 'rxjs';
+import { HaveSomeToastService } from '../_services/toaster.service';
+import { ToastMessageModel } from '../_models/toastMessage.modal';
 
 @Component({
   selector: 'app-new-contact',
@@ -14,24 +16,24 @@ export class NewContactComponent implements OnInit {
   /* CLASS ATTRIBUTES */
   display = false;
   formDefinition: NewContact[] = [];
-  postNewContactObservable
+  postNewContactObservable;
   slideOut;
-//  Dev variables
+  //  Dev variables
   fn = 'Cliff';
   ls = 'Crerar';
   ph = '131-231-2312';
   em = 'cliff@cliff.cliff';
   /* CLASS CONSTRUCTOR */
-  constructor(private msgService: InterComponentCommsService, private httpService: HttpService) {
+  constructor(private msgService: InterComponentCommsService, private httpService: HttpService, private toastr: HaveSomeToastService) {
     this.addInput('FirstName', 'First Name', this.fn);
     this.addInput('LastName', 'Last Name', this.ls);
     this.addInput('Phone', 'Phone Number', this.ph);
     this.addInput('Email', 'Email Address', this.em);
 
-      // this.addInput('FirstName', 'First Name');
-      // this.addInput('LastName', 'Last Name');
-      // this.addInput('Phone', 'Phone Number');
-      // this.addInput('Email', 'Email Address');
+    // this.addInput('FirstName', 'First Name');
+    // this.addInput('LastName', 'Last Name');
+    // this.addInput('Phone', 'Phone Number');
+    // this.addInput('Email', 'Email Address');
   }
   /* ON INIT HOOK */
   ngOnInit() {
@@ -65,10 +67,11 @@ export class NewContactComponent implements OnInit {
    */
   postContact() {
     console.log(this.formDefinition);
+    this.toastr.getSomeToast(new ToastMessageModel('Adding new contact', '', 'primary', 'cloud-upload-outline'));
     this.httpService.postNewContact(this.formDefinition)
       .subscribe(
         response => this.handleInsertResponse(response),
-        respError => this.handleInsertContactError(respError) );
+        respError => this.handleInsertContactError(respError));
     // return;
   }
 
@@ -78,17 +81,18 @@ export class NewContactComponent implements OnInit {
   handleInsertResponse(response: any): void {
     //TODO:
     // return response.opt[0];
-
-    console.log(response.res.ops.new=true);
-    this.httpService.pushNewContactData(response.res.ops)
+    console.log(response.res.ops.new = true);
+    this.httpService.pushNewContactData(response.res.ops);
+    this.toastr.getSomeToast(new ToastMessageModel('New contact saved', '', 'success', 'checkmark-outline'));
   }
 
 
   /**
    * @description handles if error is returned from respose
    */
-  handleInsertContactError(error: HttpErrorResponse):void{
+  handleInsertContactError(error: HttpErrorResponse): void {
     console.error('error: ', error);
+    this.toastr.getSomeToast(new ToastMessageModel('ERROR', 'Contact was not saved, please try again or contact support', 'danger', 'wifi-off-outline'));
     // TODO:
     return;
   }
@@ -101,7 +105,7 @@ export class NewContactComponent implements OnInit {
     this.slideOut = 'slideOutLeft'
     setTimeout(() => {
       this.display = false;
-      this.slideOut = ''
+      this.slideOut = '';
     }, 2000);
 
     return;
@@ -115,7 +119,6 @@ export class NewContactComponent implements OnInit {
     console.log('index: ', index);
     console.log('event: ', event);
     console.log('Change');
-
     return;
   }
 

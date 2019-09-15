@@ -29,7 +29,7 @@ TEMPLATE: Contact Card
 
                 <!-- CARD FOOTER -->
                 <nb-card-footer class="text-center">
-                    <button nbButton hero status="primary" (click)="enterSetCookie()">
+                    <button [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="large" nbButton hero status="primary" (click)="enterSetCookie()">
                     <nb-icon icon="log-out-outline"></nb-icon>Enter
                     </button>
                 </nb-card-footer>

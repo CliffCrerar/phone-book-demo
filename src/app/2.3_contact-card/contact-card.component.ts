@@ -4,7 +4,7 @@ import { ContactsDisplayModel, ContactModel } from '../_models/contact.model';
 import { AppDataService } from '../_services/display-data.service';
 import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 import { HttpResponse } from '@angular/common/http';
-import { Subscriber } from 'rxjs';
+import { Subscriber, Observable,Subscribable } from 'rxjs';
 import { NbFlipCardComponent, NbRevealCardComponent, NbToastRef, NbCardComponent } from '@nebular/theme';
 import { HaveSomeToastService } from '../_services/toaster.service';
 import { environment } from '../../environments/environment';
@@ -34,7 +34,7 @@ export class ContactCardComponent implements OnInit {
   public loadingElementShow = environment.production;
   public httpResponse: HttpResponse<any>;
   public slideOut: string;
-  public deleteObservable = new Subscriber<HttpResponse<any>>();
+  public deleteObservable: Subscribable<any>;
   public fNameLNameNg = 'flex:1 !important'
   public mouseOverAccent: string;
   public toastMessages = ToastMessageModel;
@@ -139,12 +139,14 @@ export class ContactCardComponent implements OnInit {
   onDeleteContactClick(contactId: string, index: number): void {
     console.log('index: ', index);
     console.log('contactId: ', contactId);
-    const deleteObservable = this.http.deleteContact(contactId, index);
+    this.toasterService.getSomeToast(new ToastMessageModel('Deleting', '', 'info', 'cloud-upload-outline'));
+    this.deleteObservable = this.http.deleteContact(contactId, index);
     // this.contactsData
 
-    deleteObservable.subscribe(resp => {
+    this.deleteObservable.subscribe(resp => {
       console.log(resp.res.deletedCount);
       this.contactsData.splice(index, 1);
+      this.toasterService.getSomeToast(new ToastMessageModel('Records was deleted', '', 'success', 'cloud-upload-outline'));
       this.deleteMode = false;
     }, err => console.error(err));
   }

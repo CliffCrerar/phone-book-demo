@@ -5,6 +5,8 @@ import { NbSidebarService } from '@nebular/theme';
 import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 import { Subject } from 'rxjs';
 import { AppDataService } from '../_services/display-data.service';
+import { HaveSomeToastService } from '../_services/toaster.service';
+import { ToastMessageModel } from '../_models/toastMessage.modal';
 
 @Component({
   selector: 'app-side-nav-controls',
@@ -18,14 +20,15 @@ export class SideNavControlsComponent implements OnInit {
   collapsedState = false;
   browserRefresh = false;
   doc = document;
+  deleteMode = false;
 
   /* CLASS CONSTRUCTOR*/
   constructor(
     private displayService: AppDataService,
     private _router: Router,
     private sideNavService: NbSidebarService,
-    private msgService: InterComponentCommsService
-
+    private msgService: InterComponentCommsService,
+    private toastr: HaveSomeToastService
   ) {
     const { collapse, search, addContact, deleteContact, logout } = this.displayService.getGeneralData();
     this.addControl(collapse, 'arrowhead-left-outline', ['side-nav-collapsed']);
@@ -77,7 +80,7 @@ export class SideNavControlsComponent implements OnInit {
 
     /* Handle Search bar Activate / deactivate switch */
     function handleSearchActivation() {
-      this.msgService.broadCastMessage({subject:'search'}); // broadcast message
+      this.msgService.broadCastMessage({ subject: 'search' }); // broadcast message
       this.doc.querySelector('[title="Search"]').classList.add('toggle-on-color');
       console.log(this.sideNavControls);
     }
@@ -89,12 +92,18 @@ export class SideNavControlsComponent implements OnInit {
     }
     /* Handles the add contact action */
     function handelAddContactFormDisplay() {
-      this.msgService.broadCastMessage({subject:'add-contact'});
+      this.msgService.broadCastMessage({ subject: 'add-contact' });
     }
     /* Handles delete contacts mode activation */
     function handelDeleteModeActivation() {
       console.log('DELETE MODE HANDLER');
-      this.msgService.broadCastMessage({subject:'delete-contact'});
+      this.deleteMode = !this.deleteMode;
+      if (this.deleteMode) {
+        this.toastr.getSomeToast(new ToastMessageModel('Delete mode activated', '', 'warning', 'alert-triangle-outline'));
+      } else {
+        this.toastr.getSomeToast(new ToastMessageModel('Deactivated delete mode', '', 'info', 'alert-triangle-outline'));
+      }
+      this.msgService.broadCastMessage({ subject: 'delete-contact' });
     }
   }
 }
