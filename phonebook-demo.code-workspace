@@ -11,7 +11,7 @@
 		}
 	],
     "settings": {
-        "workbench.colorTheme": "Shark Dark",
+        "workbench.colorTheme": "Shark Smoke",
 		"workbench.iconTheme": "simple-icons",
 		"html.format.wrapAttributes": "force-expand-multiline",
 		"typescript.implementationsCodeLens.enabled": true,
@@ -19,6 +19,27 @@
 		"html.format.indentInnerHtml": true		,
 		"angular-template-formatter.indentWidth": 2,
 		"angular-template-formatter.useSpaces": true,
-		"html.format.enable": false
+		"html.format.enable": false,
+		"javascript.implicitProjectConfig.experimentalDecorators": true,
+		"javascript.autoClosingTags": true,
+		"javascript.format.enable": true,
+		"javascript.format.insertSpaceAfterCommaDelimiter": true,
+		"javascript.format.insertSpaceAfterConstructor": true,
+		"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
+		"javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": true,
+		"javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+		"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+		"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+		"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+		"javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+		"javascript.format.insertSpaceAfterSemicolonInForStatements": true,
+		"javascript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
+		"javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+		"javascript.preferences.quoteStyle": "single",
+		"javascript.suggest.autoImports": true,
+		"tslint.jsEnable": true,
+		"[.component.html]": {
+			"editor.defaultFormatter": "Angular.ng-template"
+		}
     }
 }

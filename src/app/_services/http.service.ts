@@ -15,7 +15,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Inject } from '@angular/core';
 import { Subscribable, Observable, Subject } from 'rxjs';
-import { ContactModel, PostNewContact } from '../_models/contact.model';
+import { ContactModel, PostNewContact, PostUpdateContact, ContactsDisplayModel } from '../_models/contact.model';
 import { environment as env } from 'src/environments/environment';
 import { NewContact } from '../_models/new-contact-form.model';
 import { UrlSerializer, UrlTree } from '@angular/router';
@@ -28,8 +28,8 @@ export class HttpService {
   httpPutNewRecord: Subscribable<any>;
   mainDataSet: ContactModel[];
   maxIdNo = 0;
-  thisPostBody:ContactModel;
-  newContactSubject=new Subject<PostNewContact>();
+  thisPostBody: ContactModel;
+  newContactSubject = new Subject<PostNewContact>();
 
 
   /* CLASS CONSTRUCTOR */
@@ -99,10 +99,10 @@ export class HttpService {
     console.log('postBody: ', PostBody);
     // this.thisPostBody=PostBody;
     this.httpPutNewRecord =
-    this.http.put<PostNewContact>(
-      this.buildUrl('postContact', false),
-      PostBody,
-      this.headerPostNewContact())
+      this.http.put<PostNewContact>(
+        this.buildUrl('postContact', false),
+        PostBody,
+        this.headerPostNewContact())
     return this.httpPutNewRecord;
   }
 
@@ -110,22 +110,56 @@ export class HttpService {
  * TODO:
  */
   deleteContact(contactId: string, index: number): Subscribable<any> {
-    console.log('httpDeleteContact', contactId);
+    //console.log('httpDeleteContact', contactId);
     const deleteContactUrl = this.buildUrl("deleteContact", false);
-    console.log('deleteContactUrl: ', deleteContactUrl);
-    console.log('this.buildUrl: ', this.buildUrl);
-    return this.http.delete(`${deleteContactUrl}&delete_record=${contactId}`,this.headerGetAllRecords());
+    //console.log('deleteContactUrl: ', deleteContactUrl);
+    //console.log('this.buildUrl: ', this.buildUrl);
+    return this.http.delete(`${deleteContactUrl}&delete_record=${contactId}`, this.headerGetAllRecords());
   }
 
   /**
    * TODO: push new contacts back to components
-   *
    */
-  getNewContactCard():Subject<any>{
+  getNewContactCard(): Subject<any> {
     return this.newContactSubject;
   }
 
-  pushNewContactData(newContact: PostNewContact):void{
+  /**
+   * @description TODO:
+   */
+  pushNewContactData(newContact: PostNewContact): void {
     return this.newContactSubject.next(newContact);
   }
+
+  /**
+   * @description Post data to the database via the web api
+   */
+  postToDataBase(data: ContactsDisplayModel): void {
+    console.log('data: ', data);
+    const updatedDate = new Date().toDateString();
+    const { _id, FirstName, LastName, Email, Phone } = data;
+    const updateDateBody = new PostUpdateContact(_id, updatedDate, FirstName, LastName, Email, Phone);
+    console.log('updateDateBody: ', updateDateBody);
+
+
+    // Observable<PostUpdateContact>
+  }
 }
+
+/*
+
+    public _id: string,
+    public Updated: string,
+    public FirstName: string,
+    public LastName: string,
+    public Email: string,
+    public Phone: string,
+
+Email: "Karlie_Senger@elvera.biz"
+FirstName: "Naomi"
+LastName: "Lindgren"
+Phone: "667.886.0214 x125"
+intId: 1
+_id: "5d7acbae5c1d570c0a9ed437"
+
+*/

@@ -1,105 +1,179 @@
 <!-- ***************************************
 TEMPLATE: Contact Card
 *************************************** -->
-<div class="data-loader" *ngIf="loadingElementShow">
-
-    <img src="../../assets/wait-cards-loader.png" class="img-fluid cloud-loader" alt="cloud loader">
-    <p>{{loadMessages}}</p>
-    <!-- <span class="dot1 animated zoomIn">.</span> -->
-    <!-- <span class="dot2 animated zoomIn">.</span> -->
-    <!-- <span class="dot3 animated zoomIn">.</span> -->
-    <nb-card>
-        <nb-card-body>
-            <nb-progress-bar [value]="loadingProgress"></nb-progress-bar>
-        </nb-card-body>
-    </nb-card>
+<div
+  class="data-loader"
+  *ngIf="loadingElementShow">
+  <img
+    src="../../assets/wait-cards-loader.png"
+    class="img-fluid cloud-loader"
+    alt="cloud loader">
+  <p>{{loadMessages}}</p>
+  <!-- <span class="dot1 animated zoomIn">.</span> -->
+  <!-- <span class="dot2 animated zoomIn">.</span> -->
+  <!-- <span class="dot3 animated zoomIn">.</span> -->
+  <nb-card>
+    <nb-card-body>
+      <nb-progress-bar [value]="loadingProgress"></nb-progress-bar>
+    </nb-card-body>
+  </nb-card>
 </div>
 
-<div class="card-grid" *ngIf="!loadingElementShow">
-
+<div
+  *ngIf="!loadingElementShow"
+  class="card-grid">
+  <ng-container *ngFor="let contact of contactsData;let i = index">
     <!-- CARD FRONT -->
-    <nb-flip-card  [showToggleButton]="toggle" *ngFor="let contact of contactsData;let i = index" class="animated zoomIn" #editCardFlip >
-        <nb-card-front>
-            <nb-card #mousOver [accent]="mousOver.accent" (mouseleave)="mousOver.accent=''"  (mouseover)="mousOver.accent='success'">
-                <nb-card-header class="contact-card-header">
+    <nb-flip-card
+      [showToggleButton]="toggle"
+      class="animated zoomIn"
+      #editCardFlip>
+      <nb-card-front>
+        <nb-card
+          #mouseOver
+          [accent]="mouseOver.accent"
+          (mouseleave)="mouseOver.accent=''"
+          (mouseover)="mouseOver.accent='success'">
+          <nb-card-header class="contact-card-header">
+            <div class="d-flex justify-content-between">
+              <h5>{{contact.FirstName}} {{contact.LastName}}</h5>
+              <div>{{i+1}}/{{contactsData.length}}</div>
+            </div>
+            <nb-badge
+              *ngIf="contact.new !== undefined"
+              style="z-index: 1100"
+              text="NEW!"></nb-badge>
+          </nb-card-header>
+          <nb-card-body>
+            <p><strong>{{phoneNumberCaption}}</strong>: {{contact.Phone}}</p>
+            <p><strong>{{emailAddressCaption}}</strong>: {{contact.Email}}</p>
+          </nb-card-body>
+          <nb-card-footer>
+            <div class="d-flex flex-row justify-content-between">
+              <div>
+                <button
+                  class="animated zoomIn"
+                  nbTooltip="Permanently delete, non reversible action"
+                  nbTooltipPlacement="bottom"
+                  (click)="onDeleteContactClick(contact._id,i)"
+                  *ngIf="deleteMode"
+                  size="small"
+                  status="danger"
+                  hero
+                  nbButton>
+                  <nb-icon icon="trash-2-outline"></nb-icon>
+                </button>
+              </div>
+              <div>
+                <button
+                  [ngClass]="mouseOver.accent==='success'? 'display-edit':'hide-edit'"
+                  nbTooltipPlacement="bottom"
+                  nbTooltip="Click to edit card"
+                  nbTooltipTrigger="hover"
+                  class="align-self-end"
+                  size="small"
+                  status="success"
+                  outline
+                  nbButton
+                  (click)="editContact(editCardFlip)">
+                  <nb-icon icon="edit-outline"></nb-icon>
+                </button>
+              </div>
+            </div>
+          </nb-card-footer>
+        </nb-card>
+      </nb-card-front>
+      <!-- UPDATE FORM -->
+      <nb-card-back>
+        <nb-card accent="danger">
+          <nb-card-header>
+            <form #updateForm>
+              <!-- <div class="d-flex flex-row justify-content-between align-items-center"> -->
+              <div ngClass="first-name-last-name-elements">
+                <label for="#editFirstName">FirstName</label>
+                <input
+                  [(ngModel)]="contact.FirstName"
+                  id="editFirstName"
+                  type="text"
+                  nbInput
+                  fieldSize="small"
+                  data-value="{{contact.FirstName}}"
+                  name="FirstName">
+              </div>
+              <div ngClass="first-name-last-name-elements">
+                <label for="#editLastName">LastName</label>
+                <input
+                  [(ngModel)]="contact.LastName"
+                  id="editLastName"
+                  type="text"
+                  nbInput
+                  fieldSize="small"
+                  data-value="{{contact.LastName}}"
+                  name="LastName">
+                <!-- </div> -->
+              </div>
+            </form>
+          </nb-card-header>
+          <nb-card-body>
 
-                    <div class="d-flex justify-content-between w-100">
-                        <h5>{{contact.FirstName}} {{contact.LastName}}</h5>
-                        <div>{{i+1}}/{{contactsData.length}}</div>
-                    </div>
-                    <nb-badge *ngIf="contact.new !== undefined" style="z-index: 1100" text="NEW!"></nb-badge>
-                </nb-card-header>
-                <nb-card-body>
-                    <p><strong>{{phoneNumberCaption}}</strong>: {{contact.Phone}}</p>
-                    <p><strong>{{emailAddressCaption}}</strong>: {{contact.Email}}</p>
-                </nb-card-body>
-                <nb-card-footer>
-                    <div class="d-flex flex-row justify-content-between w-100">
-                        <div>
-                            <button class="animated zoomIn" nbTooltip="Permanently delete, non reversible action" nbTooltipPlacement="bottom" (click)="onDeleteContactClick(contact._id,i)" *ngIf="deleteMode" size="small" status="danger" hero nbButton>
-                    <nb-icon icon="trash-2-outline"></nb-icon>
-                  </button>
-                        </div>
-                        <div>
-                            <button [ngClass]="mousOver.accent==='success'? 'display-edit':'hide-edit'"  nbTooltipPlacement="bottom" nbTooltip="Click to edit card" nbTooltipTrigger="hover" class="align-self-end" size="small" status="success" outline nbButton (click)="editContact(editCardFlip)">
-                    <nb-icon icon="edit-outline"></nb-icon>
-                  </button>
-                        </div>
-                    </div>
-                </nb-card-footer>
-            </nb-card>
-        </nb-card-front>
-        <!-- UPDATE FORM -->
-        <nb-card-back>
-            <nb-card accent="danger">
-                <nb-card-header>
-                    <form #updateForm>
-                        <div class="d-flex flex-row justify-content-between w-100 align-items-center">
-                            <div ngClass="first-name-last-name-elements">
-                                <label for="#editFirstName">FirstName</label>
-                                <input [(ngModel)]="contact.FirstName"  id="editFirstName"  type="text"  nbInput fieldSize="small" data-value="{{contact.FirstName}}" name="FirstName">
-                            </div>
+            <div class="d-flex flex-row justify-content-between align-items-center">
+              <div ngClass="phone-email-elements">
+                <label for="#editPhone">Phone</label>
+                <input
+                  size="editPhone"
+                  name="Phone"
+                  [(ngModel)]="contact.Phone"
+                  fieldSize="small"
+                  type="text"
+                  nbInput
+                  placeholder="Name"
+                  data-value="{{contact.Phone}}">
+              </div>
+              <div ngClass="phone-email-elements">
+                <label for="#editEmail">Email</label>
+                <input
+                  id="editEmail"
+                  name="Email"
+                  fieldSize="small"
+                  type="email"
+                  nbInput
+                  [(ngModel)]="contact.Email"
+                  data-value="{{contact.Email}}">
+              </div>
+            </div>
+          </nb-card-body>
+          <nb-card-footer class="w-100">
+            <div class="d-flex flex-row justify-content-between align-items-center">
+              <div>
+                <button
+                  nbButton
+                  size="small"
+                  nbTooltipPlacement="bottom"
+                  nbTooltip="Any updates will not be lost"
+                  status="warning"
+                  hero
+                  (click)="onSaveOrCancelClick(editCardFlip,'CANCEL')">
+                  <nb-icon icon="slash-outline"></nb-icon>
+                </button>
+              </div>
+              <div>
+                <button
+                  nbButton
+                  size="small"
+                  nbTooltip="Save your changes permanently"
+                  nbTooltipPlacement="bottom"
+                  status="success"
+                  type="submit"
+                  hero
+                  (click)="onSaveOrCancelClick(editCardFlip,contact,$event)">
+                  <nb-icon icon="save-outline"></nb-icon>
+                </button>
+              </div>
+            </div>
 
-                            <div ngClass="first-name-last-name-elements">
-                                <label for="#editLastName">LastName</label>
-                                <input [(ngModel)]="contact.LastName"  id="editLastName"  type="text"  nbInput fieldSize="small" data-value="{{contact.LastName}}" name="LastName">
-                            </div>
-                        </div>
-                    </form>
-                </nb-card-header>
-                <nb-card-body>
-
-                    <div class="d-flex flex-row justify-content-between w-100 align-items-center">
-                        <div ngClass="phone-email-elements">
-                            <label for="#editPhone">Phone</label>
-                                <input size="editPhone" name="Phone"  [(ngModel)]="contact.Phone"  fieldSize="small"  type="text"  nbInput placeholder="Name" data-value="{{contact.Phone}}">
-                        </div>
-
-                        <div ngClass="phone-email-elements">
-                            <label for="#editEmail">Email</label>
-                                <input id="editEmail" name="Email"  fieldSize="small"  type="email"  nbInput [(ngModel)]="contact.Email" data-value="{{contact.Email}}">
-                        </div>
-                    </div>
-
-                </nb-card-body>
-                <nb-card-footer class="w-100">
-
-                    <div class="d-flex flex-row justify-content-between align-items-center">
-                        <div>
-                            <button nbButton size="small" nbTooltipPlacement="bottom" nbTooltip="Any updates will not be lost"  status="warning"  hero (click)="updateCard(editCardFlip,'CANCEL')">
-                                <nb-icon icon="slash-outline"></nb-icon>
-                                    </button>
-                        </div>
-
-                        <div>
-                            <button nbButton size="small" nbTooltip="Save your changes permanently" nbTooltipPlacement="bottom"  status="success"  hero (click)="updateCard(editCardFlip,contact,updateForm)">
-                                <nb-icon icon="save-outline"></nb-icon>
-                                    </button>
-                        </div>
-                    </div>
-
-                </nb-card-footer>
-            </nb-card>
-        </nb-card-back>
+          </nb-card-footer>
+        </nb-card>
+      </nb-card-back>
     </nb-flip-card>
+  </ng-container>
 </div>

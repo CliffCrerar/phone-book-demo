@@ -5,7 +5,7 @@ import { AppDataService } from '../_services/display-data.service';
 import { InterComponentCommsService } from '../_services/intercomp-comms.service';
 import { HttpResponse } from '@angular/common/http';
 import { Subscriber } from 'rxjs';
-import { NbFlipCardComponent, NbRevealCardComponent } from '@nebular/theme';
+import { NbFlipCardComponent, NbRevealCardComponent, NbToastRef, NbCardComponent } from '@nebular/theme';
 import { HaveSomeToastService } from '../_services/toaster.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class ContactCardComponent implements OnInit {
   public loadMessages = 'Welcome';
   public loadingElementShow = true;
   public httpResponse: HttpResponse<any>;
-  public slideOut:string;
+  public slideOut: string;
   public deleteObservable = new Subscriber<HttpResponse<any>>();
   public fNameLNameNg = "flex:1 !important"
   public mouseOverAccent: string;
@@ -91,9 +91,9 @@ export class ContactCardComponent implements OnInit {
     });
 
     // Subscribe to added card to place in view as first card once created
-    this.http.getNewContactCard().subscribe(newContact=>{
+    this.http.getNewContactCard().subscribe(newContact => {
       console.log('newContact: ', newContact[0].new = true);
-      this.contactsData.splice(0,0,newContact[0]);
+      this.contactsData.splice(0, 0, newContact[0]);
     })
   }
   /* CLASS METHODS */
@@ -108,50 +108,56 @@ export class ContactCardComponent implements OnInit {
   /**
    * @description Removes card from database
    */
-  onDeleteContactClick(contactId: string, index:number): void {
+  onDeleteContactClick(contactId: string, index: number): void {
     console.log('index: ', index);
     console.log('contactId: ', contactId);
-    const deleteObservable = this.http.deleteContact(contactId,index);
+    const deleteObservable = this.http.deleteContact(contactId, index);
     // this.contactsData
 
-    deleteObservable.subscribe(resp=>{
+    deleteObservable.subscribe(resp => {
       console.log(resp.res.deletedCount);
-      this.contactsData.splice(index,1);
-      this.deleteMode=false;
-    },err=>console.error(err))
+      this.contactsData.splice(index, 1);
+      this.deleteMode = false;
+    }, err => console.error(err))
   }
 
   /**
    * @description edit card
    */
-  editContact(flipCardRef: NbFlipCardComponent ):void{
-    //flipCard.flipped = true
+  editContact(flipCardRef: NbFlipCardComponent): void {
     flipCardRef.flipped = true;
-    console.log('flipCard: ', flipCardRef);
+    // console.log('flipCard: ', flipCardRef);
     return;
   }
 
   /**
    * @description save or cancel card update
    */
-  updateCard(...params):void{
-    console.log(params)
-    const flipCardRef = params[0];
+  onSaveOrCancelClick(...params): void {
+    console.log(params[2]);
+    params[0].flipped = false;
     // Display message and end procedure on cancel click
-    if(params[1]==='CANCEL'){
-      this.runOnUpdateCancel();
-      flipCardRef.flipped = false;
-      console.log('params[1]: ', );
+    if (params[1] === 'CANCEL') {
+      this.runOnUpdateCancel(params[0]);
       return;
     }
-    // On update click call http service and update database
+    this.http.postToDataBase(params[1]);
   }
+
+  // /**
+  //  * @description Post to database
+  //  */
+  // postToDataBase():void{
+  //   //const toastRef: NbToastRef = () => this.
+  //   this.http.postToDataBase();
+  // }
 
   /**
    * @description Cancel card update action
    */
-  runOnUpdateCancel():void{
-    this.toasterService.getSomeToast();
-    
-  }
+  runOnUpdateCancel(flipCardRef: NbFlipCardComponent) {
+
+    this.toasterService.getSomeToast('This is cool', "poes", "default");
+    return
+  };
 }

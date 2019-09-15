@@ -23,7 +23,7 @@ export class SideNavControlsComponent implements OnInit {
   constructor(
     private displayService: AppDataService,
     private _router: Router,
-    // private sideNavService: NbSidebarService,
+    private sideNavService: NbSidebarService,
     private msgService: InterComponentCommsService
 
   ) {

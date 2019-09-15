@@ -38,3 +38,15 @@ export class PostNewContact {
     public intId: number,
   ) { }
 }
+
+export class PostUpdateContact {
+  databaseFormat;
+  constructor(
+    public _id: string,
+    public Updated: string,
+    public FirstName: string,
+    public LastName: string,
+    public Email: string,
+    public Phone: string,
+  ) { }
+}
