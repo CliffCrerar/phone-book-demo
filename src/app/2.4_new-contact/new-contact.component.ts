@@ -19,21 +19,21 @@ export class NewContactComponent implements OnInit {
   postNewContactObservable;
   slideOut;
   //  Dev variables
-  fn = 'Cliff';
-  ls = 'Crerar';
-  ph = '131-231-2312';
-  em = 'cliff@cliff.cliff';
+  // fn = 'Cliff';
+  // ls = 'Crerar';
+  // ph = '131-231-2312';
+  // em = 'cliff@cliff.cliff';
   /* CLASS CONSTRUCTOR */
   constructor(private msgService: InterComponentCommsService, private httpService: HttpService, private toastr: HaveSomeToastService) {
-    this.addInput('FirstName', 'First Name', this.fn);
-    this.addInput('LastName', 'Last Name', this.ls);
-    this.addInput('Phone', 'Phone Number', this.ph);
-    this.addInput('Email', 'Email Address', this.em);
+  //   this.addInput('FirstName', 'First Name', this.fn);
+  //   this.addInput('LastName', 'Last Name', this.ls);
+  //   this.addInput('Phone', 'Phone Number', this.ph);
+  //   this.addInput('Email', 'Email Address', this.em);
 
-    // this.addInput('FirstName', 'First Name');
-    // this.addInput('LastName', 'Last Name');
-    // this.addInput('Phone', 'Phone Number');
-    // this.addInput('Email', 'Email Address');
+    this.addInput('FirstName', 'First Name');
+    this.addInput('LastName', 'Last Name');
+    this.addInput('Phone', 'Phone Number');
+    this.addInput('Email', 'Email Address');
   }
   /* ON INIT HOOK */
   ngOnInit() {
@@ -107,7 +107,6 @@ export class NewContactComponent implements OnInit {
       this.display = false;
       this.slideOut = '';
     }, 2000);
-
     return;
   }
 
@@ -127,7 +126,6 @@ export class NewContactComponent implements OnInit {
    * TODO:
    */
   onKeyformat(inputInstance: NewContact, index: number): void {
-
     return;
   }
 }
