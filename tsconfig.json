@@ -2,6 +2,8 @@
 
   "compileOnSave": false,
   "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "types" : ["node", "lodash", "express"],
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

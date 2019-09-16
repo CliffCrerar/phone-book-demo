@@ -24,6 +24,10 @@ TEMPLATE: Main App Container
         <app-side-nav-controls></app-side-nav-controls>
         <!-- <button (click)="toggleSideBar()" nbButton hero status="primary">Collapse</button> -->
         <app-new-contact></app-new-contact>
+        <hr class="mt-5"> 
+        <div class="mt-5">
+            <p style="opacity: 0.5">Version: {{appVersion}}</p>
+        </div>
     </nb-sidebar>
     <!-- LAYOUT SUB HEADER -->
     <nb-layout-header subheader class="sub-header-bg">
@@ -39,6 +43,8 @@ TEMPLATE: Main App Container
         <!-- Insert footer here -->
         <div>
             <div class="d-flex flex-row justify-content-between">
+                
+                
                 <a href="mailto:cliff.crerar@gmail.com">Get Support</a>
                 <p class="pl-3 pr-3"> | </p>
                 <a href="https://policies.cliff-crerar.tech/portal-privacy">Privacy Policy</a>

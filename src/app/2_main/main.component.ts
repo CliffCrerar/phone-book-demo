@@ -17,6 +17,7 @@ export class MainComponent implements OnInit {
   sideBarToggleObservable: Observable<{ compact: boolean, tag: string }>;
   sideBarToggleBtn: 'arrow-circle-left-outline';
   collapseBtnClass: 'collapse-btn-style';
+  appVersion: string;
   /* CLASS CONSTRUCTOR */
   constructor(
     private sideBarService: NbSidebarService,
@@ -26,6 +27,7 @@ export class MainComponent implements OnInit {
   ) {
     this.appName = uiService.getGeneralData().AppName;
     this.settingsBtnTitle = uiService.getGeneralData().settingsBtnTitle;
+    this.appVersion = uiService.getGeneralData().appVersion;
     return;
   }
   /* INIT HOOK */

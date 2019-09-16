@@ -15,6 +15,7 @@
          public search: string,
          public addContact: string,
          public deleteContact: string,
-         public logout: string
+         public logout: string,
+         public appVersion: string
          ) { }
  }

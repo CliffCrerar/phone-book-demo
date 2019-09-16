@@ -6,7 +6,7 @@
  */
 
 import { GeneralAppDisplay } from 'src/app/_models/general-display.model';
-
+import packageJSON from 'src/../package.json'
 export class AppDataService {
     /* CLASS ATTRIBUTES */
     // Login Page
@@ -24,8 +24,11 @@ export class AppDataService {
     private _new = 'Add new';
     private _delete = 'Delete';
     private _logout = 'Log out';
+    /* APP VERSION */
+    private _appVersion = packageJSON.version;
     /*CLASS CONSTRUCTOR */
-    constructor() { }
+    constructor() {
+     }
 
     /* CLASS METHODS */
     getGeneralData(): GeneralAppDisplay {
@@ -41,7 +44,8 @@ export class AppDataService {
             this._search,
             this._new,
             this._delete,
-            this._logout
+            this._logout,
+            this._appVersion
         );
     }
 }

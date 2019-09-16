@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   appName: string;
   supportLink: string;
   loading: boolean;
+  appVersion: string;
   /* CLASS CONSTRUCTOR */
   constructor(
     private uiService: AppDataService,
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     this.loading = false;
     this.appName = this.uiService.getGeneralData().AppName;
     this.supportLink = this.uiService.getGeneralData().SupportLink;
+    this.appVersion = uiService.getGeneralData().appVersion;
   }
   /* INIT HOOK */
   ngOnInit(): void {

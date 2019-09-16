@@ -41,6 +41,14 @@ npm run build
 ```
 This will produce the production version of the demo app.
 
+## Documentation
+
+For a copy of the documentation please clone this:
+
+```bash
+https://github.com/CliffCrerar/phone-book-demo.wiki.git
+```
+
 ## Further help
 
 Please contact me at cliff.crerar@gmail.com ro cliff@infinityarc.net
