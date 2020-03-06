@@ -51,4 +51,4 @@ https://github.com/CliffCrerar/phone-book-demo.wiki.git
 
 ## Further help
 
-Please contact me at cliff.crerar@gmail.com ro cliff@infinityarc.net
+Please contact me at cliff.crerar@gmail.com or cliff@infinityarc.net
