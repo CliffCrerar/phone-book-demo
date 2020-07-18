@@ -24,7 +24,7 @@
         "@nebular/theme": "^4.2.1",
         "dotenv": "^8.1.0",
         "eva-icons": "^1.1.1",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "rxjs": "~6.4.0",
         "tslib": "^1.10.0",
         "zone.js": "~0.9.1"
